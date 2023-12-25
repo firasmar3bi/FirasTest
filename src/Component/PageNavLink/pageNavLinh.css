@@ -1,0 +1,7 @@
+.pageNavLink {
+    background-color: rgba(235, 235, 235, 1) !important;
+    padding: 20px 0px 20px 50px !important;
+}
+.pageNavLink ol {
+    margin: 0;
+}
