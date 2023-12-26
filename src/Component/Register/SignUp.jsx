@@ -7,7 +7,7 @@ import { SingInSchema } from '../validation/validation'
 export default function SignUp() {
     
     const apiUrl = import.meta.env.VITE_API_URL;
-    // console.log(apiUlr);
+    // console.log(apiUrl);
 
     const initialValues = {
         userName:'',
@@ -24,10 +24,10 @@ export default function SignUp() {
         formData.append("image",values.image);
         
         try{
-            const {data} = await axios.post(`${apiUrl}`,formData)
+            const {data} = await axios.post(`${apiUrl}auth/signup`,formData)
             console.log(data);
-        }catch(errors){
-            console.log(errors);
+        }catch(error){
+            console.log(error);
         }
 
 

@@ -1,39 +1,45 @@
 import React from 'react'
 import Input from './Input'
+import axios from "axios";
 import { useFormik } from 'formik'
-import { SingInSchema } from '../validation/validation'
+import { LogInSchema } from '../validation/validation'
 
 export default function LogInSection() {
+
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const initialValues = {
         email: '',
         password: '',
     }
 
-    const onSubmit = values => {
-        const formData = new FormData();
-        formData.append("email", values.email)
-        formData.append("password", values.password)
+    const onSubmit = async values => {
+        try{
+            const {data} = await axios.post(`${apiUrl}/auth/signin`,values)
+            console.log(data);
+        }catch(error){
+            console.log(error);
+        }
     }
 
     const formik = useFormik({
 
         initialValues,
         onSubmit,
-        validationSchema: SingInSchema
+        validationSchema: LogInSchema
 
     })
 
     const inputs = [
         {
-            id: "email",
+            id: "logInEmail",
             name: "email",
             type: "email",
             title: "User email",
             value: formik.values.email,
         },
         {
-            id: "password",
+            id: "logInPassword",
             name: "password",
             type: "password",
             title: "User password",

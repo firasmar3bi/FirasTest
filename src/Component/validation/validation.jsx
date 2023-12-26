@@ -6,3 +6,7 @@ export const SingInSchema = yup.object ({
     password : yup.string().required('The password is required').min(4,'Min number of charecter is 4').max(10,'Max number of charecter is 10'),
 })
 
+export const LogInSchema = yup.object ({
+    email : yup.string().required('The email is required').email(),
+    password : yup.string().required('The password is required').min(4,'Min number of charecter is 4').max(10,'Max number of charecter is 10'),
+})
