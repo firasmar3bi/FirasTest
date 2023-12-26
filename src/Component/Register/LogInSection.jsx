@@ -2,11 +2,15 @@ import React from 'react'
 import Input from './Input'
 import axios from "axios";
 import { useFormik } from 'formik'
+import { toast } from 'react-toastify';
 import { LogInSchema } from '../validation/validation'
+// import { useNavigate } from 'react-router-dom';
 
-export default function LogInSection() {
+export default function LogInSection({getCurentUser}) {
 
     const apiUrl = import.meta.env.VITE_API_URL;
+    // const navigate = useNavigate;
+
 
     const initialValues = {
         email: '',
@@ -16,9 +20,25 @@ export default function LogInSection() {
     const onSubmit = async values => {
         try{
             const {data} = await axios.post(`${apiUrl}/auth/signin`,values)
-            console.log(data);
+            if(data.message == 'success'){
+                formik.resetForm();
+                localStorage.setItem("userToken", data.token)
+                getCurentUser()
+                toast.success('Your Login success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: 1,
+                    theme: "colored",
+                });
+                // navigate('/home');
+
+            }
         }catch(error){
-            console.log(error);
+            console.log(error.response.data.message);
         }
     }
 

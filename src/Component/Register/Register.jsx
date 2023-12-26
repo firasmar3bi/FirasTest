@@ -4,14 +4,14 @@ import Input from './Input'
 import SignUp from './SignUp'
 import LogInSection from './LogInSection'
 
-export default function Register() {
+export default function Register({getCurentUser}) {
     return (
         <>
             <PageNavLink />
             <section className="main-section">
                 <div className="container-fluid">
                     <div className="row  m-1 m-lg-5">
-                        <LogInSection />
+                        <LogInSection getCurentUser={getCurentUser}/>
                         <SignUp />
                     </div>
                 </div>

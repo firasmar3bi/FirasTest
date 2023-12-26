@@ -2,12 +2,12 @@ import React from 'react'
 import axios from "axios";
 import Input from './Input'
 import { useFormik } from 'formik'
+import { toast } from 'react-toastify';
 import { SingInSchema } from '../validation/validation'
 
 export default function SignUp() {
     
     const apiUrl = import.meta.env.VITE_API_URL;
-    // console.log(apiUrl);
 
     const initialValues = {
         userName:'',
@@ -25,7 +25,19 @@ export default function SignUp() {
         
         try{
             const {data} = await axios.post(`${apiUrl}auth/signup`,formData)
-            console.log(data);
+            if(data.message == 'success'){
+                formik.resetForm();
+                toast.success('Your aussunt in created , please Verify Your Email To Login', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: 1,
+                    theme: "colored",
+                    });
+            }
         }catch(error){
             console.log(error);
         }
@@ -42,7 +54,6 @@ export default function SignUp() {
     })
 
     const handelFieldChange = (event) =>{
-        console.log(event.target.files[0]);
         formik.setFieldValue('image',event.target.files[0])
     } 
 

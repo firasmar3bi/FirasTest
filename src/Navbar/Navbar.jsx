@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../assets/img/logo.png'
 import PhoneImg from '../assets/img/phone-icon.png'
-import CartImg from '../assets/img/carticon.jpeg'
+import { Link } from 'react-router-dom'
 
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
                                 <a className="nav-link nav-custom-font" aria-current="page" href="ContactUs.html">Help</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link nav-custom-font" href="login.html">My Account</a>
+                                <Link className="nav-link nav-custom-font" to="/register">My Account</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link nav-custom-font" href="about.html">About Us</a>
@@ -43,8 +43,8 @@ export default function Navbar() {
                                         Account
                                     </a>
                                     <ul className="dropdown-menu dropdown-menu-start w-auto">
-                                        <li><a className="dropdown-item text-capitalize nav-custom-font" href="#">LOG-In</a></li>
-                                        <li><a className="dropdown-item text-capitalize nav-custom-font" href="#">SING-UP</a></li>
+                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
+                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -151,7 +151,7 @@ export default function Navbar() {
                         <div className="collapse navbar-collapse nav-mobile-screen" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item px-2">
-                                    <a className="nav-link text-black nav-text active" aria-current="page" href="index.html">Home</a>
+                                    <Link className="nav-link text-black nav-text active" aria-current="page" to="">Home</Link>
                                 </li>
                                 <li className="nav-item px-2">
                                     <a className="nav-link text-black nav-text" aria-current="page" href="#">PAGES</a>
@@ -189,7 +189,7 @@ export default function Navbar() {
                                     <a className="nav-link text-black nav-text d-block d-md-block d-lg-none" aria-current="page" href="about.html">About Us</a>
                                 </li>
                                 <li className="nav-item px-2">
-                                    <a className="nav-link text-black nav-text d-block d-md-block d-lg-none" aria-current="page" href="wishlist.html">My tWishlis</a>
+                                    <a className="nav-link text-black nav-text d-block d-md-block d-lg-none" aria-current="page" href="wishlist.html">MyWishlis</a>
                                 </li>
                                 <li className="nav-item px-2 ">
                                     <div className="d-none nav-custom-mobile">

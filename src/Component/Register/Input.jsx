@@ -2,8 +2,6 @@ import React from 'react'
 
 export default function Input({type , id , name , title , value , onChange , errors , onBlur , touchad}) {
   
-  // console.log(touchad);
-
   return (
     <div className="mb-3">
       <label className="form-label" htmlFor={id}> {title} 
