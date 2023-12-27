@@ -3,10 +3,10 @@ import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import { Outlet } from 'react-router-dom'
 
-export default function Layout() {
+export default function Layout({userToken , setUserToken}) {
   return (
     <>
-        <Navbar />
+        <Navbar userToken={userToken} setUserToken={setUserToken} />
             <Outlet />
         <Footer />
     </>

@@ -1,10 +1,19 @@
 import React from 'react'
 import Logo from '../assets/img/logo.png'
 import PhoneImg from '../assets/img/phone-icon.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
-export default function Navbar() {
+export default function Navbar({ userToken , setUserToken }) {
+
+    const navigate = useNavigate()
+    const Logout = ()=>{
+        localStorage.removeItem("userToken")
+        setUserToken(null)
+        navigate('/Home')
+    }
+
+
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary nav-custom-color d-none d-md-none d-lg-block">
@@ -43,8 +52,15 @@ export default function Navbar() {
                                         Account
                                     </a>
                                     <ul className="dropdown-menu dropdown-menu-start w-auto">
-                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
-                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
+                                        {
+                                            !userToken ? <>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
+                                            </> : <>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">Profile</Link></li>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" onClick={()=>Logout()}>LogOut</Link></li>
+                                            </>
+                                        }
                                     </ul>
                                 </li>
                             </ul>
@@ -154,7 +170,7 @@ export default function Navbar() {
                                     <Link className="nav-link text-black nav-text active" aria-current="page" to="">Home</Link>
                                 </li>
                                 <li className="nav-item px-2">
-                                    <a className="nav-link text-black nav-text" aria-current="page" href="#">PAGES</a>
+                                    <Link className="nav-link text-black nav-text" aria-current="page" to="/Catgories">Catgories</Link>
                                 </li>
                                 <li className="nav-link">
                                     <div className="dropdown" >

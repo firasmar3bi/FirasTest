@@ -1,6 +1,5 @@
 import React from 'react'
 import PageNavLink from '../PageNavLink/PageNavLink'
-import Input from './Input'
 import SignUp from './SignUp'
 import LogInSection from './LogInSection'
 

@@ -1,0 +1,14 @@
+.swiper {
+    padding: 25px;
+}
+.swiper-button-prev,.swiper-button-next {
+    background-color: #fab91f;
+    color: black;
+    padding: 25px;
+    border-radius: 50%;
+    margin-top: calc(-15px - (var(--swiper-navigation-size) / 2));
+}
+.swiper-button-prev:after, .swiper-button-next:after {
+    font-size: 30px;
+    font-weight: bolder;
+}
