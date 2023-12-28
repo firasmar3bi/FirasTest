@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '../assets/img/logo.png'
 import PhoneImg from '../assets/img/phone-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
+import { CatgoriesContext } from '../Component/Context/CatgoriesContext'
 
 
-export default function Navbar({ userToken , setUserToken }) {
+export default function Navbar({ userToken, setUserToken }) {
 
     const navigate = useNavigate()
-    const Logout = ()=>{
+    const Logout = () => {
         localStorage.removeItem("userToken")
         setUserToken(null)
         navigate('/Home')
     }
 
+    const data = useContext(CatgoriesContext);
 
     return (
         <>
@@ -58,7 +60,7 @@ export default function Navbar({ userToken , setUserToken }) {
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
                                             </> : <>
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">Profile</Link></li>
-                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" onClick={()=>Logout()}>LogOut</Link></li>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" onClick={() => Logout()}>LogOut</Link></li>
                                             </>
                                         }
                                     </ul>
@@ -69,7 +71,7 @@ export default function Navbar({ userToken , setUserToken }) {
                 </div>
             </nav>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
-                <div className="container-fluid justify-content-lg-around justify-content-between align-items-center">
+                <div className="container-fluid justify-content-lg-around justify-content-between align-items-center mt-4">
                     <a className="navbar-brand" href="index.html">
                         <img src={Logo} alt="druco logo" className="w-100" />
                     </a>
@@ -107,9 +109,15 @@ export default function Navbar({ userToken , setUserToken }) {
                                         All categories
                                     </button>
                                     <ul className="dropdown-menu" id="navDrop">
-                                        <li><a className="dropdown-item" href="#">Batteries</a></li>
-                                        <li><a className="dropdown-item" href="#">Brake</a></li>
-                                        <li><a className="dropdown-item" href="#">Electric Brakes</a></li>
+                                        {
+                                            data?.categories.length ? data.categories.map((category) =>
+                                                <Link  key={category._id} className="dropdown-item" to={`/products/category/${category._id}`}>
+                                                    <li >
+                                                        {category.name}
+                                                    </li>
+                                                </Link>
+                                            ) : console.log("no data")
+                                        }
                                     </ul>
                                 </div>
                             </li>
@@ -167,7 +175,7 @@ export default function Navbar({ userToken , setUserToken }) {
                         <div className="collapse navbar-collapse nav-mobile-screen" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item px-2">
-                                    <Link className="nav-link text-black nav-text active" aria-current="page" to="">Home</Link>
+                                    <Link className="nav-link text-black nav-text active" aria-current="page" to="/">Home</Link>
                                 </li>
                                 <li className="nav-item px-2">
                                     <Link className="nav-link text-black nav-text" aria-current="page" to="/Catgories">Catgories</Link>

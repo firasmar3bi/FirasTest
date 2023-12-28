@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './categories.css'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Catrgories() {
 
@@ -32,9 +32,9 @@ export default function Catrgories() {
                         {
                              data?.categories.length ? data.categories.map((category , index)=>
                                 <SwiperSlide key={index} >
-                                    {/* <Link to={`/products/category/${category._id}`}> */}
+                                    <Link to={`/products/category/${category._id}`}>
                                         <img src={category.image.secure_url} />
-                                    {/* </Link> */}
+                                    </Link>
                                 </SwiperSlide>
                             ):<h2>Ther's no data</h2>
                         }

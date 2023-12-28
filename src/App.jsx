@@ -7,6 +7,8 @@ import Home from './Component/Home/Home'
 import Register from './Component/Register/Register'
 import { jwtDecode } from "jwt-decode";
 import Catrgories from './Component/Categories/Catrgories';
+import ProductInCategories from './Component/ProductInCategories/ProductInCategories';
+import GetProduct from './Component/GetProduct/GetProduct';
 
 
 export default function App() {
@@ -30,6 +32,14 @@ export default function App() {
         {
           path:"Catgories",
           element:<Catrgories />
+        },
+        {
+          path:"products/category/:_id",
+          element:<ProductInCategories />
+        },
+        {
+          path:"products/:_id",
+          element:<GetProduct />
         },
         {
           path:'register',
