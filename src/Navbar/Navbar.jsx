@@ -38,7 +38,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                 <a className="nav-link nav-custom-font" href="ContactUs.html">Contact Us</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link nav-custom-font " href="wishlist.html">My wishlist</a>
+                                <Link className="nav-link nav-custom-font " to="/Shop">Shop</Link>
                             </li>
                         </ul>
                         <div className="d-flex align-items-center justify-content-center">
@@ -182,9 +182,9 @@ export default function Navbar({ userToken, setUserToken }) {
                                 </li>
                                 <li className="nav-link">
                                     <div className="dropdown" >
-                                        <a className="text-black nav-text px-2  text-decoration-none custom-icon-hover" href="carPart.html">
-                                            SERVICE PARTS
-                                        </a>
+                                        <Link className="text-black nav-text px-2  text-decoration-none custom-icon-hover" to="/Shop">
+                                            Shop
+                                        </Link>
                                     </div>
                                 </li>
                                 <li className="nav-link">

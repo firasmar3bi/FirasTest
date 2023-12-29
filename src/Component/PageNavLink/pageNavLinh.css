@@ -5,3 +5,23 @@
 .pageNavLink ol {
     margin: 0;
 }
+
+.pageNavLink ol {
+    margin: 0;
+}
+
+.pageNavLink ol li {
+    Font-size: 15px;
+    Font-weight: 400;
+    Line-height: 20px;
+    color: rgba(32, 32, 32, 1);
+}
+
+.pageNavLink ol li a {
+    color: rgba(132, 132, 132, 1);
+    text-decoration: none;
+}
+
+.pageNavLink ol li a:hover {
+    text-decoration: underline;
+}

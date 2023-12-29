@@ -10,7 +10,7 @@ export default function GetProduct() {
 
     const getProduct = async () => {
         try {
-            const { data } = await axios.get(`${apiUrl}/products/656afed9415e5e5f8d84871f`)
+            const { data } = await axios.get(`${apiUrl}/products/${id._id}`)
             return(data.product);
         } catch (error) {
             console.log(error);
@@ -33,7 +33,7 @@ export default function GetProduct() {
                                     {data.discount > 0 ?
                                         <>
                                             <span class="position-absolute translate-middle badge rounded-pill bg-danger">
-                                                {data.discount}
+                                                $ {data.discount}
                                             </span>
                                             <span className="position-absolute translate-middle badge rounded-pill bg-warning text-uppercase">
                                                 hot
@@ -61,7 +61,12 @@ export default function GetProduct() {
                                     <h1>
                                         {data.name}
                                     </h1>
-                                    <p className="mb-0 mt-3 price">{data.price}$<span /></p>
+                                    {data.discount>0?<>
+                                                <p className='price'>$ {data.finalPrice} <span> $ {data.price}</span></p>
+                                                </>:<>
+                                                <p className='price'>$ {data.price} <span /></p>
+                                                </>}
+                                    {/* <p className="mb-0 mt-3 price">{data.price}$<span /></p> */}
                                     <div className="mt-4">
                                         <i className="fa-regular fa-circle-check text-success" /> <span className="ms-1">
                                             {data.stook > 0 ? <>In Stook</> : <>Out of Stook</>}

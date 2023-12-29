@@ -32,20 +32,20 @@ export default function ProductInCategories() {
             <div className='container'>
                 <div className='row'>
                     {
-                        data?.products.length ? data.products.map((category) => <>
-                            <div className="col-6 col-md-6 col-lg-4 p-4 carPart-card" key={category._id}>
+                        data?.products.length ? data.products.map((category , index) => <>
+                            <div className="col-6 col-md-6 col-lg-4 p-4 carPart-card" key={index}>
                                 <div className="card p-0 m-0 position-relative">
                                     {/* <div className="d-flex flex-column custom-postion">
                                         <i className="fa-solid fa-magnifying-glass" />
                                         <i className="fa-regular fa-heart" />
                                         <i className="fa-solid fa-code-compare" />
                                     </div> */}
-                                    <Link href="showPart.html" className="nav-link">
+                                    <Link to={`/products/${category._id}`} className="nav-link">
                                         <img src={category.mainImage.secure_url} className="card-img-top" alt={category.name} />
                                     </Link>
                                     <div className="card-body">
                                         <h3 className="card-title">
-                                            <Link href="showPart.html" className="nav-link">  {category.name} </Link>
+                                            <Link to={`/products/${category._id}`} className="nav-link">  {category.name} </Link>
                                         </h3>
                                         {/* <div className="d-flex align-items-center p-0 m-0 sale-start">
                                             <i className="fa-solid fa-star" />

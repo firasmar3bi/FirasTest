@@ -6,13 +6,16 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { CatgoriesContextProvider } from './Component/Context/CatgoriesContext.jsx'
+import { ProductsContextProvider } from './Component/Context/ProductsContext.jsx'
 
-    const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
         <CatgoriesContextProvider>
-            <App />
+            <ProductsContextProvider>
+                <App />
+            </ProductsContextProvider>
         </CatgoriesContextProvider>
     </QueryClientProvider>
 

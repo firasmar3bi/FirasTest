@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 import Catrgories from './Component/Categories/Catrgories';
 import ProductInCategories from './Component/ProductInCategories/ProductInCategories';
 import GetProduct from './Component/GetProduct/GetProduct';
+import Shop from './Component/Shop/Shop';
 
 
 export default function App() {
@@ -40,6 +41,10 @@ export default function App() {
         {
           path:"products/:_id",
           element:<GetProduct />
+        },
+        {
+          path:"Shop",
+          element:<Shop />
         },
         {
           path:'register',
