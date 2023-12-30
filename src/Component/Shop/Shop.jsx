@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import { ProductsContext } from '../Context/ProductsContext'
 import { CatgoriesContext } from '../Context/CatgoriesContext'
+import axios from "axios";
+
 export default function Shop() {
 
-    const ProductsData = useContext(ProductsContext)
     const CategoryData = useContext(CatgoriesContext)
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const [page, setPage] = useState(1)
+    const [data, setData] = useState();
+    const [pageNumber,setPageNumber]=useState();
 
+    const pageChange = (e) => {
+        setPage(e.target.value);
+    }
+
+    const getProducts = async () => {
+        try {
+            const { data } = await axios.get(`${apiUrl}/products?page=${page}&limit=4`)
+            setData(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [page]);
 
     return (
         <>
@@ -93,96 +113,63 @@ export default function Shop() {
 
                         <div className="col-12 col-lg-8 " id="shopPageOne" >
                             <div className="row " id="columnAlignOne">
-                                {
-                                    ProductsData?.products.length ? ProductsData.products.map((product) =>
-                                        <>
-                                            <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card" key={product._id}>
-                                                <div className="card p-0 m-0 position-relative">
-                                                    <div className="d-flex flex-column custom-postion z-3">
-                                                        <i className="fa-solid fa-magnifying-glass" />
-                                                        <i className="fa-regular fa-heart" />
-                                                        <i className="fa-solid fa-code-compare" />
-                                                    </div>
-                                                    <div className="discount position-relative">
-                                                        {product.discount > 0 ? <>
-                                                            <span className="position-absolute translate-middle badge rounded-pill bg-danger">
-                                                                {product.discount}%
-                                                            </span></>
-                                                            : <>
-                                                                <span></span>
-                                                            </>}
-
-                                                        <a href="showPart.html" className="nav-link">
-                                                            <img src={product.mainImage.secure_url} className="card-img-top" alt={product.name} />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <h3 className="card-title">
-                                                            <a href="showPart.html" className="nav-link">{product.name}</a>
-                                                        </h3>
-                                                        <div className="d-flex align-items-center p-0 m-0 sale-start">
-                                                            <i className="fa-solid fa-star" />
-                                                            <i className="fa-solid fa-star" />
-                                                            <i className="fa-solid fa-star" />
-                                                            <i className="fa-solid fa-star" />
-                                                            <i className="fa-solid fa-star " />
-                                                        </div>
-                                                        {product.discount > 0 ? <>
-                                                            <p>$ {product.finalPrice} <span> $ {product.price}</span></p>
-                                                        </> : <>
-                                                            <p>{product.price}</p>
+                                {data?.products.length ? data.products.map((product) =>
+                                    <>
+                                        <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card" key={product._id}>
+                                            <div className="card p-0 m-0 position-relative">
+                                                <div className="d-flex flex-column custom-postion z-3">
+                                                    <i className="fa-solid fa-magnifying-glass" />
+                                                    <i className="fa-regular fa-heart" />
+                                                    <i className="fa-solid fa-code-compare" />
+                                                </div>
+                                                <div className="discount position-relative">
+                                                    {product.discount > 0 ? <>
+                                                        <span className="position-absolute translate-middle badge rounded-pill bg-danger">
+                                                            {product.discount}%
+                                                        </span></>
+                                                        : <>
+                                                            <span></span>
                                                         </>}
-                                                        <a href="showPart.html" className="btn rounded-pill text-uppercase">add to cart</a>
+                                                    <a href="showPart.html" className="nav-link">
+                                                        <img src={product.mainImage.secure_url} className="card-img-top" alt={product.name} />
+                                                    </a>
+                                                </div>
+                                                <div className="card-body">
+                                                    <h3 className="card-title">
+                                                        <a href="showPart.html" className="nav-link">{product.name}</a>
+                                                    </h3>
+                                                    <div className="d-flex align-items-center p-0 m-0 sale-start">
+                                                        <i className="fa-solid fa-star" />
+                                                        <i className="fa-solid fa-star" />
+                                                        <i className="fa-solid fa-star" />
+                                                        <i className="fa-solid fa-star" />
+                                                        <i className="fa-solid fa-star " />
                                                     </div>
+                                                    {product.discount > 0 ? <>
+                                                        <p>$ {product.finalPrice} <span> $ {product.price}</span></p>
+                                                    </> : <>
+                                                        <p>{product.price}</p>
+                                                    </>}
+                                                    <a href="showPart.html" className="btn rounded-pill text-uppercase">add to cart</a>
                                                 </div>
                                             </div>
-                                        </>
-                                    ) : <></>
+                                        </div>
+                                    </>
+                                ) : <></>
                                 }
                             </div>
                         </div>
-
-                        {/* <div className="col-12 col-lg-8 " id="shopPageOne">
-                            <div className="row " id="columnAlignOne">
-                                <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card">
-                                    <div className="card p-0 m-0 position-relative">
-                                        <div className="d-flex flex-column custom-postion z-3">
-                                            <i className="fa-solid fa-magnifying-glass" />
-                                            <i className="fa-regular fa-heart" />
-                                            <i className="fa-solid fa-code-compare" />
-                                        </div>
-                                        <div className="discount position-relative">
-                                            <span className="position-absolute translate-middle badge rounded-pill bg-danger">
-                                                -22%
-                                            </span>
-                                            <a href="showPart.html" className="nav-link">
-                                                <img src="assets/imgs/sale/02-480x480.jpg" className="card-img-top" alt=" Kit Brembo GT BMW" />
-                                            </a>
-                                        </div>
-                                        <div className="card-body">
-                                            <h3 className="card-title">
-                                                <a href="showPart.html" className="nav-link"> Kit Brembo GT BMW</a>
-                                            </h3>
-                                            <div className="d-flex align-items-center p-0 m-0 sale-start">
-                                                <i className="fa-solid fa-star" />
-                                                <i className="fa-solid fa-star" />
-                                                <i className="fa-solid fa-star" />
-                                                <i className="fa-solid fa-star" />
-                                                <i className="fa-solid fa-star " />
-                                            </div>
-                                            <p>$69.75 <span>$89.74</span></p>
-                                            <a href="showPart.html" className="btn rounded-pill text-uppercase">add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                     <nav aria-label="Page navigation " className="pageNav">
                         <ul className="pagination">
-                            <li className="page-item"><a className="page-link gg" href="#shopPageOne">1</a></li>
-                            <li className="page-item"><a className="page-link gg" href="#shopPageTwo">2</a></li>
-                            <li className="page-item"><a className="page-link gg" href="#shopPageThree">3</a></li>
+                                {/* {
+                                data?.products.length ? data.total/data.page.map((index)=>{
+                                    <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={index}>{index}</button></li>
+                                }):<></>
+                                } */}
+                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={1}> 1 </button></li>
+                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={2}> 2 </button></li>
+                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={3}> 3 </button></li>
                         </ul>
                     </nav>
                 </div>
