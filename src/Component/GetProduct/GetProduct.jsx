@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query';
 import axios from "axios";
-
+import "./GetProduct.css"
+import { CartContext } from '../Context/CartContext.Jsx';
 export default function GetProduct() {
 
-    const id = useParams();
     const apiUrl = import.meta.env.VITE_API_URL;
-
+    const id = useParams();
+    const {addToCartContext} = useContext(CartContext)
     const getProduct = async () => {
         try {
             const { data } = await axios.get(`${apiUrl}/products/${id._id}`)
@@ -16,12 +17,15 @@ export default function GetProduct() {
             console.log(error);
         }
     }
-
     const { data, isLoading } = useQuery("api_Prodect", getProduct)
+
+    const addToCart = async (productId)=>{
+        const res = await addToCartContext(productId)
+    }
     if (isLoading) {
         <h2>... Loding</h2>
     }
-
+    
     return (
         <>
             <div className='container'>
@@ -69,7 +73,7 @@ export default function GetProduct() {
                                     {/* <p className="mb-0 mt-3 price">{data.price}$<span /></p> */}
                                     <div className="mt-4">
                                         <i className="fa-regular fa-circle-check text-success" /> <span className="ms-1">
-                                            {data.stook > 0 ? <>In Stook</> : <>Out of Stook</>}
+                                            {data.stock > 0 ? <>In Stook</> : <>Out of Stook</>}
                                         </span>
                                     </div>
                                     {/* <p className="mt-3 mb-0">The small round table in the dinette may be great for casual meals with your family, but inviting overnight guests.</p> */}
@@ -89,7 +93,10 @@ export default function GetProduct() {
                                     </div>
                                 </div> */}
                                     <div className="mt-4">
-                                        <a href="#" className="btn rounded-pill text-uppercase showPartAone">add to cart</a>
+                                        <button 
+                                        className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
+                                        onClick={()=>addToCart(data._id)}
+                                        >add to cart</button>
                                         {/* <a href="#" className="btn rounded-pill text-uppercase showPartAtwo">BUY IT NOW</a> */}
                                     </div>
                                     {/* <div className="mt-4 d-flex align-items-center">

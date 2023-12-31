@@ -10,6 +10,7 @@ import Catrgories from './Component/Categories/Catrgories';
 import ProductInCategories from './Component/ProductInCategories/ProductInCategories';
 import GetProduct from './Component/GetProduct/GetProduct';
 import Shop from './Component/Shop/Shop';
+import Cart from './Component/Cart/Cart';
 
 
 export default function App() {
@@ -45,6 +46,10 @@ export default function App() {
         {
           path:"Shop",
           element:<Shop />
+        },
+        {
+          path:"Cart",
+          element:<Cart />
         },
         {
           path:'register',

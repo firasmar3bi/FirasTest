@@ -1878,6 +1878,8 @@ h3 {
 .productsImgHeigth {
     height: 400px;
 }
+
+
 /* NAVBAR IN MOBILE  */
 
 @media only screen and (max-width:991px) {
@@ -1942,6 +1944,7 @@ h3 {
         justify-content: left !important;
     }
 }
+
 
 
 /* HEADER */

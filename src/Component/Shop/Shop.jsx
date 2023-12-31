@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { CatgoriesContext } from '../Context/CatgoriesContext'
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export default function Shop() {
 
@@ -9,7 +10,7 @@ export default function Shop() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [page, setPage] = useState(1)
     const [data, setData] = useState();
-    const [pageNumber,setPageNumber]=useState();
+    // const [pageNumber,setPageNumber]=useState();
 
     const pageChange = (e) => {
         setPage(e.target.value);
@@ -113,9 +114,9 @@ export default function Shop() {
 
                         <div className="col-12 col-lg-8 " id="shopPageOne" >
                             <div className="row " id="columnAlignOne">
-                                {data?.products.length ? data.products.map((product) =>
+                                {data?.products.length ? data.products.map((product , index) =>
                                     <>
-                                        <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card" key={product._id}>
+                                        <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card" key={index}>
                                             <div className="card p-0 m-0 position-relative">
                                                 <div className="d-flex flex-column custom-postion z-3">
                                                     <i className="fa-solid fa-magnifying-glass" />
@@ -130,13 +131,13 @@ export default function Shop() {
                                                         : <>
                                                             <span></span>
                                                         </>}
-                                                    <a href="showPart.html" className="nav-link">
+                                                    <Link to={`/products/${product._id}`} className="nav-link">
                                                         <img src={product.mainImage.secure_url} className="card-img-top" alt={product.name} />
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="card-body">
                                                     <h3 className="card-title">
-                                                        <a href="showPart.html" className="nav-link">{product.name}</a>
+                                                        <Link to={`/products/${product._id}`} className="nav-link">{product.name}</Link>
                                                     </h3>
                                                     <div className="d-flex align-items-center p-0 m-0 sale-start">
                                                         <i className="fa-solid fa-star" />

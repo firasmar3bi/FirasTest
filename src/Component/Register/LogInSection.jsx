@@ -4,12 +4,12 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
 import { LogInSchema } from '../validation/validation'
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 export default function LogInSection({getCurentUser}) {
 
     const apiUrl = import.meta.env.VITE_API_URL;
-    // const navigate = useNavigate;
+    const navigate = useNavigate()
 
 
     const initialValues = {
@@ -27,14 +27,14 @@ export default function LogInSection({getCurentUser}) {
                 toast.success('Your Login success', {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: 1,
                     theme: "colored",
                 });
-                // navigate('/home');
+                navigate('/')
 
             }
         }catch(error){

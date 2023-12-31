@@ -38,7 +38,7 @@ export default function HomeHeader() {
                     <div className="carousel-inner ">
                         {
                             headerImg.map((slide, index) => 
-                                <div className="carousel-item active position-relative" key={index}>
+                                <div className={`carousel-item ${index == 0 ? "active" : ""} position-relative`} key={index}>
                                     <div className="overlay">
                                     </div>
                                     <img src={slide.img} className="d-block w-100" alt={slide.name} />

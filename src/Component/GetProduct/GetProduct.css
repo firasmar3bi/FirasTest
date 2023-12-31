@@ -1,0 +1,14 @@
+.addToCartButton {
+    transition: 1s !important;
+    display: block !important;
+    background-color: black !important; 
+    color: #ffb91f !important;
+    padding: 15px !important;
+    Font-weight: 600 !important;
+    Line-height: 24px !important;
+    margin-top: 50px !important;
+}
+.addToCartButton:hover {
+    background-color:#ffb91f !important;
+    color: black !important;
+}

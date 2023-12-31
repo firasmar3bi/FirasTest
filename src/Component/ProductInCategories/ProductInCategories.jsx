@@ -55,7 +55,7 @@ export default function ProductInCategories() {
                                             <i className="fa-solid fa-star start-no" />
                                         </div> */}
                                         <p>$ {category.price} <span /></p>
-                                        <a href="showPart.html" className="btn rounded-pill  text-uppercase">add to cart</a>
+                                        <a href="showPart.html" className="btn rounded-pill  text-uppercase ">add to cart</a>
                                     </div>
                                 </div>
                             </div>

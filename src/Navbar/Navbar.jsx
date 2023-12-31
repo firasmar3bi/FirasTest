@@ -3,7 +3,7 @@ import Logo from '../assets/img/logo.png'
 import PhoneImg from '../assets/img/phone-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { CatgoriesContext } from '../Component/Context/CatgoriesContext'
-
+import axios from "axios";
 
 export default function Navbar({ userToken, setUserToken }) {
 
@@ -11,9 +11,26 @@ export default function Navbar({ userToken, setUserToken }) {
     const Logout = () => {
         localStorage.removeItem("userToken")
         setUserToken(null)
-        navigate('/Home')
+        navigate('/register')
     }
+    const apiUrl = import.meta.env.VITE_API_URL;
+    
+    // console.log(apiUrl);
+    const clerCart = async ()=>{
+        try{
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.patch(`${apiUrl}/cart/clear`,
+            {},
+            {
+                headers:{Authorization:`Tariq__${token}`}
+            }
+            )
+            console.log(data);
+        }catch(error){
+            console.log(error);
+        }
 
+    }
     const data = useContext(CatgoriesContext);
 
     return (
@@ -54,6 +71,9 @@ export default function Navbar({ userToken, setUserToken }) {
                                         Account
                                     </a>
                                     <ul className="dropdown-menu dropdown-menu-start w-auto">
+                                        <li>
+                                            <button onClick={()=>clerCart()}>dfff</button>
+                                        </li>
                                         {
                                             !userToken ? <>
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
@@ -116,7 +136,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                                         {category.name}
                                                     </li>
                                                 </Link>
-                                            ) : console.log("no data")
+                                            ) : <></>
                                         }
                                     </ul>
                                 </div>
@@ -189,9 +209,9 @@ export default function Navbar({ userToken, setUserToken }) {
                                 </li>
                                 <li className="nav-link">
                                     <div className="dropdown" >
-                                        <a className="text-black nav-text px-2  text-decoration-none custom-icon-hover" href="carPart.html">
-                                            BRAKE
-                                        </a>
+                                        <Link className="text-black nav-text px-2  text-decoration-none custom-icon-hover" to="/Cart">
+                                            Cart
+                                        </Link>
                                     </div>
                                 </li>
                                 <li className="nav-link">
