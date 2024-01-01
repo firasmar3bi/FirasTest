@@ -2,10 +2,15 @@ import React from 'react'
 import { useContext } from 'react'
 import { ProductsContext } from '../../Context/ProductsContext'
 import { Link } from 'react-router-dom'
-
+import { CartContext } from '../../Context/CartContext';
 export default function Products() {
 
     const data = useContext(ProductsContext)
+    // Add Proudect To Cart = >
+    const { addToCartContext } = useContext(CartContext)
+    const addToCart = async (productId) => {
+        const res = await addToCartContext(productId)
+    }
 
     return (
         <>
@@ -17,12 +22,12 @@ export default function Products() {
                                 <span className="text-uppercase">sale</span>
                                 <h2>Tops and clothes</h2>
                                 <p>Black Friday selection up to 50% off</p>
-                                <button className="btn text-uppercase rounded-pill">shop now</button>
+                                <Link className="btn text-uppercase rounded-pill border-1 border-black ms-3" to="/Shop">shop now</Link>
                             </div>
                         </div>
 
                         {
-                            data?.products.length ? data.products.slice(0, 3).map((product) => 
+                            data?.products.length ? data.products.slice(0, 3).map((product) =>
                                 <>
                                     <div className="col-6 col-lg-3 p-0 carPart-card" key={product._id}>
                                         <div className="card p-0 m-0 position-relative">
@@ -45,12 +50,15 @@ export default function Products() {
                                                     <i className="fa-solid fa-star" />
                                                     <i className="fa-solid fa-star start-no" />
                                                 </div>
-                                                {product.discount>0?<>
-                                                <p>$ {product.finalPrice} <span> $ {product.price}</span></p>
-                                                </>:<>
-                                                <p>$ {product.price} <span /></p>
+                                                {product.discount > 0 ? <>
+                                                    <p>$ {product.finalPrice} <span> $ {product.price}</span></p>
+                                                </> : <>
+                                                    <p>$ {product.price} <span /></p>
                                                 </>}
-                                                <a href="showPart.html" className="btn rounded-pill  text-uppercase">add to cart</a>
+                                                <button
+                                                    className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
+                                                    onClick={() => addToCart(product._id)}
+                                                >add to cart</button>
                                             </div>
                                         </div>
                                     </div>

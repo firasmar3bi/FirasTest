@@ -2,20 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { CatgoriesContext } from '../Context/CatgoriesContext'
 import axios from "axios";
+import { CartContext } from '../Context/CartContext.Jsx';
 import { Link } from 'react-router-dom';
 
 export default function Shop() {
 
+    // Get The Category = >
     const CategoryData = useContext(CatgoriesContext)
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const [page, setPage] = useState(1)
+    
+    // Get All Products =>
     const [data, setData] = useState();
-    // const [pageNumber,setPageNumber]=useState();
-
-    const pageChange = (e) => {
-        setPage(e.target.value);
-    }
-
+    const apiUrl = import.meta.env.VITE_API_URL;
     const getProducts = async () => {
         try {
             const { data } = await axios.get(`${apiUrl}/products?page=${page}&limit=4`)
@@ -24,6 +21,19 @@ export default function Shop() {
             console.log(error);
         }
     }
+
+    // Change The Api Page =>
+    const [page, setPage] = useState(1)
+    const pageChange = (e) => {
+        setPage(e.target.value);
+    }
+    
+    // Add Proudect To Cart = >
+    const {addToCartContext} = useContext(CartContext)
+    const addToCart = async (productId)=>{
+        const res = await addToCartContext(productId)
+    }
+
 
     useEffect(() => {
         getProducts()
@@ -114,7 +124,7 @@ export default function Shop() {
 
                         <div className="col-12 col-lg-8 " id="shopPageOne" >
                             <div className="row " id="columnAlignOne">
-                                {data?.products.length ? data.products.map((product , index) =>
+                                {data?.products.length ? data.products.map((product, index) =>
                                     <>
                                         <div className="col-6 col-md-6 col-lg-4 p-0 carPart-card" key={index}>
                                             <div className="card p-0 m-0 position-relative">
@@ -151,7 +161,10 @@ export default function Shop() {
                                                     </> : <>
                                                         <p>{product.price}</p>
                                                     </>}
-                                                    <a href="showPart.html" className="btn rounded-pill text-uppercase">add to cart</a>
+                                                    <button
+                                                        className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
+                                                        onClick={() => addToCart(product._id)}
+                                                    >add to cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,14 +176,9 @@ export default function Shop() {
                     </div>
                     <nav aria-label="Page navigation " className="pageNav">
                         <ul className="pagination">
-                                {/* {
-                                data?.products.length ? data.total/data.page.map((index)=>{
-                                    <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={index}>{index}</button></li>
-                                }):<></>
-                                } */}
-                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={1}> 1 </button></li>
-                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={2}> 2 </button></li>
-                                <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={3}> 3 </button></li>
+                            <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={1}> 1 </button></li>
+                            <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={2}> 2 </button></li>
+                            <li className="page-item"><button className="page-link gg" onClick={(e) => pageChange(e)} value={3}> 3 </button></li>
                         </ul>
                     </nav>
                 </div>

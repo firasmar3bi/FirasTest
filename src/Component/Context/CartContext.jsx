@@ -16,11 +16,25 @@ export function CartContextProvider({children}){
                 headers:{Authorization:`Tariq__${token}`}
             }
             )
-            console.log(data);
+            return(data);
         }catch(error){
             console.log(error);
         }
     }
 
-    return <CartContext.Provider value={ {addToCartContext} }> {children} </CartContext.Provider>
+    const GetCartContext = async ()=>{
+        try{
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.get(`${apiUrl}/cart`,
+            {
+                headers:{Authorization:`Tariq__${token}`}
+            }
+            )
+            return(data);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    return <CartContext.Provider value={ {addToCartContext , GetCartContext} }> {children} </CartContext.Provider>
 }
