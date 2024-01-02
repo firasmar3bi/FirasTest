@@ -94,7 +94,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
                                             </> : <>
-                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">Profile</Link></li>
+                                                <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/Profile">Profile</Link></li>
                                                 <li><button className="dropdown-item text-capitalize nav-custom-font" onClick={() => Logout()}>LogOut</button></li>
                                             </>
                                         }
@@ -145,7 +145,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                                                         <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
                                                                         <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">SING-UP</Link></li>
                                                                     </> : <>
-                                                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">Profile</Link></li>
+                                                                        <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/Profile">Profile</Link></li>
                                                                         <li><Link className="dropdown-item text-capitalize nav-custom-font" onClick={() => Logout()}>LogOut</Link></li>
                                                                     </>
                                                                 }

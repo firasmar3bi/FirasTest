@@ -11,6 +11,9 @@ import ProductInCategories from './Component/ProductInCategories/ProductInCatego
 import GetProduct from './Component/GetProduct/GetProduct';
 import Shop from './Component/Shop/Shop';
 import Cart from './Component/Cart/Cart';
+import Profile from './Component/Profile/Profile';
+import ProfileLayout from './Layout/ProfileLayout';
+import UserOrder from './Component/Profile/UserOrder';
 
 
 export default function App() {
@@ -57,7 +60,20 @@ export default function App() {
         },  
       ]
     },
-  
+    {
+      path:'/Profile',
+      element: <ProfileLayout userToken={userToken} setUserToken={setUserToken} />,
+      children :[
+        {
+          index:true,
+          element: <Profile />
+        },
+        {
+          path : "UserOrder",
+          element : <UserOrder />
+        }
+      ]
+    }
   ])
 
   useEffect(()=>{
