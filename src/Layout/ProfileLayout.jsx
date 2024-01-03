@@ -8,8 +8,12 @@ export default function ProfileLayout({userToken , setUserToken}) {
   return (
     <>
     <Navbar userToken={userToken} setUserToken={setUserToken} />
-    <ProfileNavbar />
-        <Outlet />
+    
+    <div className='row bg-body-secondary mb-5 mt-3 py-5'>
+      <div className='col-3'><ProfileNavbar /></div>
+      <div className='col-9'><Outlet /></div>
+    </div>
+         
     <Footer />        
     </>
   )

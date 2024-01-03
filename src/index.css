@@ -1176,7 +1176,7 @@
         Font-size: 14.04px;
         Font-weight: 400;
         Line-height: 18px;
-        color: #868686
+        color: #868686;
     }
     
     .cart-totals {
@@ -1874,14 +1874,19 @@ h3 {
 
 .dropdown-menu-start[data-bs-popper]{
     right: auto;
-    left: -30px !important;
+    left: -20 !important;
 }
 
 .productsImgHeigth {
     height: 400px;
 }
 
-
+.ProfileNavbar {
+    background-color: #0c152e;
+}
+.ProfileNavbar ul li:hover{
+    background-color: #3b5290;
+}
 /* NAVBAR IN MOBILE  */
 
 @media only screen and (max-width:991px) {

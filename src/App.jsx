@@ -14,6 +14,7 @@ import Cart from './Component/Cart/Cart';
 import Profile from './Component/Profile/Profile';
 import ProfileLayout from './Layout/ProfileLayout';
 import UserOrder from './Component/Profile/UserOrder';
+import Contact from './Component/Profile/Contact';
 
 
 export default function App() {
@@ -67,6 +68,10 @@ export default function App() {
         {
           index:true,
           element: <Profile />
+        },
+        {
+          path:"Contact",
+          element: <Contact />
         },
         {
           path : "UserOrder",

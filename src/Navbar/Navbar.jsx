@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Logo from '../assets/img/logo.png'
-import PhoneImg from '../assets/img/phone-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { CatgoriesContext } from '../Component/Context/CatgoriesContext'
-import axios from "axios";
+import { CartContext } from '../Component/Context/CartContext'
+import { ProfileContext } from '../Component/Context/ProfileContext'
+import { toast } from 'react-toastify';
 
 export default function Navbar({ userToken, setUserToken }) {
 
@@ -13,27 +14,31 @@ export default function Navbar({ userToken, setUserToken }) {
         localStorage.removeItem("userToken")
         setUserToken(null)
         navigate('/register')
-    }
-
-    const apiUrl = import.meta.env.VITE_API_URL;
-    // Clear Product From Cart =>
-    const clerCart = async () => {
-        try {
-            const token = localStorage.getItem("userToken");
-            const { data } = await axios.patch(`${apiUrl}/cart/clear`,
-                {},
-                {
-                    headers: { Authorization: `Tariq__${token}` }
-                }
-            )
-            return (data);
-        } catch (error) {
-            console.log(error);
-        }
-
+        toast.success('Your Are Loged Out', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 1,
+            theme: "colored",
+        });
     }
     const data = useContext(CatgoriesContext);
 
+    // Get Profile Imag
+    const { GetProfileContext } = useContext(ProfileContext)
+    const [dataProfile, setDataProfile] = useState(null);
+    const GetProfile = async () => {
+        const res = await GetProfileContext()
+        setDataProfile(res)
+    }
+    useEffect(() => {
+        GetProfile()
+    }, [Logout]);
+    // Cart Quantity =>
+    let { quantity } = useContext(CartContext)
     return (
         <>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
@@ -82,13 +87,17 @@ export default function Navbar({ userToken, setUserToken }) {
                         <li className="nav-link d-flex justify-content-center align-items-center">
                             <ul className="navbar-nav">
                                 <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle text-capitalize nav-custom-font" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Account
+                                    <a className="nav-link dropdown-toggle text-capitalize nav-custom-font d-flex justify-content-center align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {
+                                            dataProfile?.user ?
+                                                <>
+                                                    <img src={dataProfile.user.image.secure_url} alt="Logo" width={50} height={50} className="d-inline-block align-text-top me-3 rounded-circle" />
+                                                    {dataProfile.user.userName}
+                                                </>
+                                            : <p className='m-0'>Account</p>
+                                        }
                                     </a>
                                     <ul className="dropdown-menu dropdown-menu-start w-auto accountDropdown">
-                                        <li>
-                                            <button className='dropdown-item text-capitalize nav-custom-font' onClick={() => clerCart()}>Clear Cart</button>
-                                        </li>
                                         {
                                             !userToken ? <>
                                                 <li><Link className="dropdown-item text-capitalize nav-custom-font" to="/register">LOG-In</Link></li>
@@ -121,13 +130,18 @@ export default function Navbar({ userToken, setUserToken }) {
                                         </Link>
                                     </div>
                                 </li>
-                                <li className="nav-link">
-                                    <div className="dropdown" >
-                                        <Link className="text-black nav-text px-2  text-decoration-none custom-icon-hover" to="/Cart">
-                                            Cart
-                                        </Link>
-                                    </div>
-                                </li>
+                                {userToken ? <>
+                                    <li className="nav-link">
+                                        <div className="dropdown" >
+                                            <Link className="text-black nav-text px-2 position-relative text-decoration-none custom-icon-hover" to="/Cart">
+                                                Cart
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {quantity}
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                </> : <></>}
                                 <li className="nav-item px-2 ">
                                     <div className="d-none nav-custom-mobile">
                                         <div className="d-flex  flex-column w-100">

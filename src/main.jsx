@@ -9,6 +9,8 @@ import { CatgoriesContextProvider } from './Component/Context/CatgoriesContext.j
 import { ProductsContextProvider } from './Component/Context/ProductsContext.jsx'
 import { CartContextProvider } from './Component/Context/CartContext.Jsx'
 import { ProfileContextProvider } from './Component/Context/ProfileContext.jsx'
+import { UserOrderContextProvider } from './Component/Context/OrderContext.jsx'
+
 
 const queryClient = new QueryClient()
 
@@ -18,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ProductsContextProvider>
                 <CartContextProvider>
                     <ProfileContextProvider>
-                        <App />
+                        <UserOrderContextProvider >
+                            <App />
+                        </UserOrderContextProvider>
                     </ProfileContextProvider>
                 </CartContextProvider>
             </ProductsContextProvider>

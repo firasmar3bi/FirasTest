@@ -1,11 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext , useState} from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext(null)
 
 export function CartContextProvider({children}){
     
     const apiUrl = import.meta.env.VITE_API_URL;
+    let [quantity , setQuantity] = useState(0);
 
     const addToCartContext = async (productId)=>{
         try{
@@ -16,6 +18,19 @@ export function CartContextProvider({children}){
                 headers:{Authorization:`Tariq__${token}`}
             }
             )
+            if (data.message == 'success') {
+                setQuantity(quantity++)
+                toast.success('Product Add success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: 1,
+                    theme: "colored",
+                });
+            }
             return(data);
         }catch(error){
             console.log(error);
@@ -36,5 +51,5 @@ export function CartContextProvider({children}){
         }
     }
 
-    return <CartContext.Provider value={ {addToCartContext , GetCartContext} }> {children} </CartContext.Provider>
+    return <CartContext.Provider value={ {addToCartContext , GetCartContext, quantity , setQuantity } }> {children} </CartContext.Provider>
 }
