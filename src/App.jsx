@@ -15,6 +15,7 @@ import Profile from './Component/Profile/Profile';
 import ProfileLayout from './Layout/ProfileLayout';
 import UserOrder from './Component/Profile/UserOrder';
 import Contact from './Component/Profile/Contact';
+import Checkout from './Component/Checkout/Checkout';
 
 
 export default function App() {
@@ -58,6 +59,10 @@ export default function App() {
         {
           path:'register',
           element:<Register getCurentUser={getCurentUser}/>
+        },  
+        {
+          path:'Checkout',
+          element:<Checkout />
         },  
       ]
     },

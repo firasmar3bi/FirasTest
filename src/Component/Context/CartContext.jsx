@@ -19,7 +19,8 @@ export function CartContextProvider({children}){
             }
             )
             if (data.message == 'success') {
-                setQuantity(quantity++)
+                setQuantity(quantity + 1)
+                localStorage.setItem("quantity" , quantity)
                 toast.success('Product Add success', {
                     position: "top-right",
                     autoClose: 5000,
@@ -47,7 +48,7 @@ export function CartContextProvider({children}){
             )
             return(data);
         }catch(error){
-            console.log(error);
+            return <><p className="bg-danger">Ther no data in Cart </p></>;
         }
     }
 
