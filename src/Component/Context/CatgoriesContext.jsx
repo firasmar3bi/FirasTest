@@ -10,7 +10,7 @@ export function CatgoriesContextProvider({children}){
     
     const getCatgories = async()=>{
         try{
-            const {data} = await axios.get(`${apiUrl}/categories/`)
+            const {data} = await axios.get(`${apiUrl}/categories/active?page=1&limit=20`)
             return(data);
         }catch(error){
             console.log(error);

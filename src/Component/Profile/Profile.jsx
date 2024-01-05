@@ -9,6 +9,7 @@ export default function Profile() {
         const data = await GetProfileContext()
         setData(data)
     }
+
     useEffect(() => {
         GetProfile()
     }, []);
