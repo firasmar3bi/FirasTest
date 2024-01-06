@@ -15,7 +15,7 @@ export default function Contact() {
 
     return (
         <>
-            <div className='container m-5 text-white rounded-5 h-100 ProfileNavbar'>
+            <div className='container m-5 rounded-5 h-100 bg-body-tertiary'>
                 <div className='container row m-5 py-5'>
                     {
                         data?.user ?

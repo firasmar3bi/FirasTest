@@ -1887,6 +1887,10 @@ h3 {
 .ProfileNavbar ul li:hover{
     background-color: #3b5290;
 }
+
+table th {
+    width: 0px !important;
+}
 /* NAVBAR IN MOBILE  */
 
 @media only screen and (max-width:991px) {

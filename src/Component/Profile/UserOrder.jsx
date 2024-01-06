@@ -17,36 +17,35 @@ export default function UserOrder() {
 
 
   return (
-    <div className='container my-5 bg-body-tertiary rounded-5 h-100'>
-      <div className='container row my-5 py-5'>
+    <div className='container my-5 py-2 bg-body-tertiary rounded-5 h-100 w-100'>
+      <div className='container row my-5 py-5 w-100'>
+              <table className="table table-striped w-100">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Order Date</th> 
+                    <th>Product Name</th>
+                    <th>Order Status</th>
+                    <th>Order Address</th>
+                  </tr>
+                </thead>
+                <tbody>
         {
-          data?.orders
-            ?
+          data?.orders ? data.orders.map((order, index) =>
             <>
-              <div className='col-6'>
-                {/* <div className='cardImag w-75 d-flex justify-content-center align-items-center h'>
-                  <img src={data.orders} alt="" className='w-75 rounded-5' />
-                </div> */}
-              </div>
-              <div className='col-6'>
-                {/* <div className='d-flex flex-column justify-content-between h-100'>
-                  <div>
-                    <h2>Name :</h2>
-                    <p>{data.orders}</p>
-                  </div>
-                  <div>
-                    <h2>Email :</h2>
-                    <p>{data.orders}</p>
-                  </div>
-                  <div>
-                    <h2>Role :</h2>
-                    <p>{data.orders}</p>
-                  </div>
-                </div> */}
-              </div>
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td className='w-25'>{order.createdAt}</td>
+                    <td >{order.products[0].productId.name}</td>
+                    <td>{order.status}</td>
+                    <td>{order.address}</td>
+                  </tr>
             </>
-            : <></>
+          )
+          : <></>
         }
+        </tbody>
+        </table>
       </div>
     </div>
   )

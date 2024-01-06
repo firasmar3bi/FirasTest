@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from './Input'
 import axios from "axios";
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
 import { LogInSchema } from '../validation/validation'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import ForgetPassword from './ForgetPassword';
 
-export default function LogInSection({getCurentUser}) {
+export default function LogInSection({ getCurentUser }) {
 
     const apiUrl = import.meta.env.VITE_API_URL;
+    const [logInerror, setLogInError] = useState(null)
     const navigate = useNavigate()
 
 
@@ -18,9 +20,9 @@ export default function LogInSection({getCurentUser}) {
     }
 
     const onSubmit = async values => {
-        try{
-            const {data} = await axios.post(`${apiUrl}/auth/signin`,values)
-            if(data.message == 'success'){
+        try {
+            const { data } = await axios.post(`${apiUrl}/auth/signin`, values)
+            if (data.message == 'success') {
                 formik.resetForm();
                 localStorage.setItem("userToken", data.token)
                 getCurentUser()
@@ -37,8 +39,8 @@ export default function LogInSection({getCurentUser}) {
                 navigate('/')
 
             }
-        }catch(error){
-            console.log(error.response.data.message);
+        } catch (error) {
+            setLogInError(error.response.data.message);
         }
     }
 
@@ -86,11 +88,13 @@ export default function LogInSection({getCurentUser}) {
         <div className="col-12 col-md-12 col-lg-6 log-in ">
             <h2 className="mb-5">Login</h2>
             <form onSubmit={formik.handleSubmit} >
-
                 {registerInputs}
-
                 <button className="btn text-uppercase rounded-pill text-black" type="submit" disabled={!formik.isValid}>register</button>
-
+                {/* Button trigger modal */}
+                <Link className=" ms-3 text-uppercase rounded-pill text-black link-underline-info text-info link-warning" to="ForgetPassword">
+                Do You Forget password ?
+                </Link>
+                {logInerror ? <p className='m-0 ms-3 text-danger d-inline-block fw-bolder'>{logInerror}</p> : <></>}
             </form>
         </div>
     )

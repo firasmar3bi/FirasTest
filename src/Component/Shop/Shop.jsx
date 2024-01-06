@@ -64,7 +64,7 @@ export default function Shop() {
                         </ul>
                     </nav>
                     <div className="row">
-                        <div className="d-none d-md-none d-lg-block col-lg-4 ">
+                        <div className="d-none d-md-none d-lg-block col-lg-3 ">
                             <ul className="list-group filter">
                                 <li className="list-group-item">
                                     <h3>CATEGORY</h3>
@@ -122,7 +122,7 @@ export default function Shop() {
                             </ul>
                         </div>
 
-                        <div className="col-12 col-lg-8 " id="shopPageOne" >
+                        <div className="col-12 col-lg-9 " id="shopPageOne" >
                             <div className="row " id="columnAlignOne">
                                 {data?.products.length ? data.products.map((product, index) =>
                                     <>

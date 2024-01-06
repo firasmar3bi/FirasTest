@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import Input from './Input'
 import { useFormik } from 'formik'
@@ -8,7 +8,7 @@ import { SingInSchema } from '../validation/validation'
 export default function SignUp() {
     
     const apiUrl = import.meta.env.VITE_API_URL;
-
+    const [signInerror,setSignInerror] = useState(null)
     const initialValues = {
         userName:'',
         email:'',
@@ -39,7 +39,7 @@ export default function SignUp() {
                     });
             }
         }catch(error){
-            console.log(error);
+            setSignInerror(error);
         }
 
 

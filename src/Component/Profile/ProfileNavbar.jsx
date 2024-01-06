@@ -45,11 +45,6 @@ export default function ProfileNavbar() {
                             User Order
                         </Link>
                     </li>
-                    <li className="nav-item py-2 w-100">
-                        <Link className="nav-link nav-text " to="/Cart">
-                            Cart
-                        </Link>
-                    </li>
                 </ul>
             </div>
         </>

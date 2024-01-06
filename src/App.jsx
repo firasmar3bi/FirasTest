@@ -16,6 +16,10 @@ import ProfileLayout from './Layout/ProfileLayout';
 import UserOrder from './Component/Profile/UserOrder';
 import Contact from './Component/Profile/Contact';
 import Checkout from './Component/Checkout/Checkout';
+import ProtectRouting from './Component/ProtectRouting/ProtectRouting';
+import PageNotFound from './Component/PageNotFound/PageNotFound';
+import ForgetPassword from './Component/Register/ForgetPassword';
+import RestPassword from './Component/Register/restPassword';
 
 
 export default function App() {
@@ -54,33 +58,45 @@ export default function App() {
         },
         {
           path:"Cart",
-          element:<Cart />
+          element:<ProtectRouting><Cart /></ProtectRouting> 
         },
         {
           path:'register',
           element:<Register getCurentUser={getCurentUser}/>
         },  
         {
-          path:'Checkout',
-          element:<Checkout />
+          path:'register/ForgetPassword',
+          element:<ForgetPassword />
         },  
+        {
+          path:'RestPassword',
+          element: <RestPassword />
+        },  
+        {
+          path:'Checkout',
+          element:<ProtectRouting><Checkout /></ProtectRouting>
+        },
+        {
+          path:"*",
+          element:<PageNotFound />
+        }  
       ]
     },
     {
       path:'/Profile',
-      element: <ProfileLayout userToken={userToken} setUserToken={setUserToken} />,
+      element: <ProtectRouting><ProfileLayout userToken={userToken} setUserToken={setUserToken} /></ProtectRouting>,
       children :[
         {
           index:true,
-          element: <Profile />
+          element: <ProtectRouting><Profile /></ProtectRouting>
         },
         {
           path:"Contact",
-          element: <Contact />
+          element: <ProtectRouting><Contact /></ProtectRouting>
         },
         {
           path : "UserOrder",
-          element : <UserOrder />
+          element : <ProtectRouting><UserOrder /></ProtectRouting>
         }
       ]
     }
