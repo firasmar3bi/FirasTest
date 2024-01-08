@@ -55,10 +55,10 @@ export default function Products() {
                                                 </> : <>
                                                     <p>$ {product.price} <span /></p>
                                                 </>}
-                                                <button
+                                                {localStorage.getItem("userToken")? <button
                                                     className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
                                                     onClick={() => addToCart(product._id)}
-                                                >add to cart</button>
+                                                >Add To Cart</button> : <> <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link> </> }
                                             </div>
                                         </div>
                                     </div>

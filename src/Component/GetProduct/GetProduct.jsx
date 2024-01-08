@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query';
 import axios from "axios";
 import "./GetProduct.css"
 import { CartContext } from '../Context/CartContext.Jsx';
+import GetReviews from './GetReviews';
 export default function GetProduct() {
 
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -93,10 +94,14 @@ export default function GetProduct() {
                                     </div>
                                 </div> */}
                                     <div className="mt-4">
-                                        <button 
-                                        className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
-                                        onClick={()=>addToCart(data._id)}
-                                        >add to cart</button>
+                                    {localStorage.getItem("userToken")? <button
+                                                    className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
+                                                    onClick={() => addToCart(data._id)}>Add To Cart</button>
+                                                : <>
+                                        <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link> 
+                                                </>
+                                    }
+
                                         {/* <a href="#" className="btn rounded-pill text-uppercase showPartAtwo">BUY IT NOW</a> */}
                                     </div>
                                     {/* <div className="mt-4 d-flex align-items-center">
@@ -132,6 +137,8 @@ export default function GetProduct() {
                     </>}
 
                 </div>
+                {data ? <GetReviews data={data} />:<></>}
+                
             </div>
         </>
     )

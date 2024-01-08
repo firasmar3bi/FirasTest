@@ -12,3 +12,64 @@
     background-color:#ffb91f !important;
     color: black !important;
 }
+.testimonials {
+    font-family: 'Roboto', sans-serif;
+}
+
+.testimonials i {
+    color: black;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 16px;
+}
+
+.testimonials .testimonials-cust-p {
+    padding: 25px 25px;
+}
+
+.testimonials h3 {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #313131;
+}
+
+.testimonials .testim-span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.5px;
+    color: #5b5b5b;
+}
+
+.testimonials .cust-hover {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #5b5b5b;
+}
+
+.testimonials .cust-hover:hover {
+    color: #f3f3f3;
+    background: #5b5b5b;
+    border-radius: 10px;
+}
+
+.testimonials .carousel-indicators button {
+    background-color: #ffffff;
+    color: var(--min-color);
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--min-color);
+    border-radius: 50%;
+    transition: 1s;
+}
+
+.testimonials .carousel-indicators button.active {
+    background-color: var(--min-color);
+}
+
+@media only screen and (max-width:768px) {
+    .testimonials .custom-me {
+        margin-left: 20%;
+    }
+}

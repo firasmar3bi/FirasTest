@@ -34,11 +34,15 @@ export default function Navbar({ userToken, setUserToken }) {
         const res = await GetProfileContext()
         setDataProfile(res)
     }
-    useEffect(() => {
-        GetProfile()
-    }, [Logout]);
+
+        useEffect(() => {
+            if (localStorage.getItem("userToken")) {
+                GetProfile()
+            }
+        }, [Logout]);
+        let { quantity } = useContext(CartContext)
+
     // Cart Quantity =>
-    let { quantity } = useContext(CartContext)
     return (
         <>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
