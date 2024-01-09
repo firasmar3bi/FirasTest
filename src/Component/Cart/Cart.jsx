@@ -3,11 +3,13 @@ import { CartContext } from '../Context/CartContext.Jsx'
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import Loading from '../loading/loading';
 
 export default function Cart() {
 
-    let { GetCartContext, quantity, setQuantity } = useContext(CartContext)
-    const [data, setData] = useState(null)
+    let { GetCartContext, quantity, setQuantity } = useContext(CartContext);
+    const [data, setData] = useState(null);
+    const [loading,setLoading]=useState(false);
     const apiUrl = import.meta.env.VITE_API_URL;
 
     // Get Cart Proudect =>
@@ -19,6 +21,7 @@ export default function Cart() {
     // Clear Product From Cart =>
     const clerCart = async () => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("userToken");
             const { data } = await axios.patch(`${apiUrl}/cart/clear`,
                 {},
@@ -43,12 +46,15 @@ export default function Cart() {
             return (data);
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     // remove Product from cart =>
     const removeItemFunction = async (productId) => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("userToken");
             const { data } = await axios.patch(`${apiUrl}/cart/removeItem`,
                 { productId },
@@ -73,21 +79,29 @@ export default function Cart() {
             return (data);
         } catch (error) {
             console.log(error);
+        }finally {
+            setLoading(false)
         }
 
     }
 
     const removeItem = (productId) => {
+        setLoading(true)
         removeItemFunction(productId)
+        setLoading(false)
     }
 
     let plusQuantity = () => {
+        setLoading(true)
         setQuantity(quantity + 1);
         localStorage.setItem("quantity",quantity)
+        setLoading(false)
     }
     let minusQuantity = () => {
+        setLoading(true)
         setQuantity(quantity - 1);
         localStorage.setItem("quantity",quantity)
+        setLoading(false)
     }
 
 
@@ -102,7 +116,7 @@ export default function Cart() {
                         <div className='col-8'>
                             <h1 className="py-5 mt-5 ps-3 d-inline-block">My Cart</h1>
                             <button className='btn btn-danger text-capitalize nav-custom-font mx-5 d-inline' onClick={() => clerCart()}>Clear Cart</button>
-
+                                 {loading ? <Loading/> : ''}
                             <div className="row d-none d-md-flex">
                                 <div className="col-2 d-flex justify-content-center align-items-center">
                                     <p className="wishTitel p-0 m-0 border-0">Product Img</p>
@@ -143,14 +157,15 @@ export default function Cart() {
                                         </div>
                                         <div className="col-12 col-md-3 d-flex justify-content-center align-items-center">
                                             <button className='btn me-2 btn-light' onClick={() => minusQuantity()} > - </button>
-                                            <p className="m-0">{quantity}</p>
+                                            <p className="m-0">{quantity} {loading ? <Loading/> : ''} </p>
                                             <button className='btn ms-2 btn-light' onClick={() => plusQuantity()} > + </button>
                                         </div>
                                         <div className="col-12 col-md-1 d-flex justify-content-center align-items-center ">
+                                            {loading ? <Loading/> : ''}
                                             <button type="button" className="btn-close closeCustom" onClick={() => removeItem(product.productId)} />
                                         </div>
                                     </div>
-                                </>) : <><h1>... Loading</h1></>
+                                </>) : <><Loading /></>
                             }
                         </div>
                         <div className='col-4 py-5 mt-5'>

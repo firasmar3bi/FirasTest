@@ -22,29 +22,29 @@ export default function Footer() {
                     </div>
                     <div className="col-6 col-lg-3 ps-3 ps-lg-0">
                         <h4 className="pb-4 text-uppercase">MY ACCOUNT</h4>
-                        <p><a href="#" className="nav-link text-black py-1"> About</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Advertising</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Business Development</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Careers</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Permissions</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Contact</a></p>
+                        <p><a href="#" className="nav-link py-1"> About</a></p>
+                        <p><a href="#" className="nav-link py-1"> Advertising</a></p>
+                        <p><a href="#" className="nav-link py-1"> Business Development</a></p>
+                        <p><a href="#" className="nav-link py-1"> Careers</a></p>
+                        <p><a href="#" className="nav-link py-1"> Permissions</a></p>
+                        <p><a href="#" className="nav-link py-1"> Contact</a></p>
                     </div>
                     <div className="col-6 col-lg-3 ps-3 ps-lg-0">
                         <h4 className="pb-4 text-uppercase">PRODUCT</h4>
-                        <p><a href="#" className="nav-link text-black py-1"> About</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Advertising</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Business Development</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Careers</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Permissions</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Contact</a></p>
+                        <p><a href="#" className="nav-link py-1"> About</a></p>
+                        <p><a href="#" className="nav-link py-1"> Advertising</a></p>
+                        <p><a href="#" className="nav-link py-1"> Business Development</a></p>
+                        <p><a href="#" className="nav-link py-1"> Careers</a></p>
+                        <p><a href="#" className="nav-link py-1"> Permissions</a></p>
+                        <p><a href="#" className="nav-link py-1"> Contact</a></p>
                     </div>
                     <div className="col-12 col-lg-3 ps-3 ps-lg-0">
                         <h4 className="pb-4 text-uppercase">READER SERVICES</h4>
-                        <p><a href="#" className="nav-link text-black py-1"> Advertising</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Business Development</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Careers</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Permissions</a></p>
-                        <p><a href="#" className="nav-link text-black py-1"> Contact Us</a></p>
+                        <p><a href="#" className="nav-link py-1"> Advertising</a></p>
+                        <p><a href="#" className="nav-link py-1"> Business Development</a></p>
+                        <p><a href="#" className="nav-link py-1"> Careers</a></p>
+                        <p><a href="#" className="nav-link py-1"> Permissions</a></p>
+                        <p><a href="#" className="nav-link py-1"> Contact Us</a></p>
                     </div>
                 </div>
                 <hr />

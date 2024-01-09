@@ -1,15 +1,20 @@
-import React from 'react'
+import React , { useState }from 'react'
 import { useContext } from 'react'
 import { ProductsContext } from '../../Context/ProductsContext'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../Context/CartContext';
+import Loading from '../../loading/loading';
 export default function Products() {
 
     const data = useContext(ProductsContext)
+    const [loading,setLoading]=useState(false);
+
     // Add Proudect To Cart = >
     const { addToCartContext } = useContext(CartContext)
     const addToCart = async (productId) => {
+        setLoading(true)
         const res = await addToCartContext(productId)
+        setLoading(false)
     }
 
     return (
@@ -25,10 +30,8 @@ export default function Products() {
                                 <Link className="btn text-uppercase rounded-pill border-1 border-black ms-3" to="/Shop">shop now</Link>
                             </div>
                         </div>
-
                         {
                             data?.products.length ? data.products.slice(0, 3).map((product) =>
-                                <>
                                     <div className="col-6 col-lg-3 p-0 carPart-card" key={product._id}>
                                         <div className="card p-0 m-0 position-relative">
                                             {/* <div className="d-flex flex-column custom-postion">
@@ -55,14 +58,18 @@ export default function Products() {
                                                 </> : <>
                                                     <p>$ {product.price} <span /></p>
                                                 </>}
-                                                {localStorage.getItem("userToken")? <button
+                                                {localStorage.getItem("userToken")? 
+                                                <>
+                                                <button
                                                     className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
                                                     onClick={() => addToCart(product._id)}
-                                                >Add To Cart</button> : <> <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link> </> }
+                                                >Add To Cart</button> 
+                                                {loading ? <Loading /> : ''}
+                                                </> : <>
+                                                 <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link> </> }                                               
                                             </div>
                                         </div>
                                     </div>
-                                </>
                             ) : <></>
                         }
 

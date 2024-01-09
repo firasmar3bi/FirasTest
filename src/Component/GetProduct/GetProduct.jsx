@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext , useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query';
 import axios from "axios";
 import "./GetProduct.css"
+import Loading from '../loading/loading';
 import { CartContext } from '../Context/CartContext.Jsx';
 import GetReviews from './GetReviews';
 export default function GetProduct() {
 
     const apiUrl = import.meta.env.VITE_API_URL;
     const id = useParams();
+    const [loading,setLoading]=useState(false);
     const {addToCartContext} = useContext(CartContext)
     const getProduct = async () => {
         try {
@@ -21,10 +23,12 @@ export default function GetProduct() {
     const { data, isLoading } = useQuery("api_Prodect", getProduct)
 
     const addToCart = async (productId)=>{
+        setLoading(true)
         const res = await addToCartContext(productId)
+        setLoading(false)
     }
     if (isLoading) {
-        <h2>... Loding</h2>
+        <Loading />
     }
     
     return (
@@ -94,10 +98,16 @@ export default function GetProduct() {
                                     </div>
                                 </div> */}
                                     <div className="mt-4">
-                                    {localStorage.getItem("userToken")? <button
-                                                    className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
-                                                    onClick={() => addToCart(data._id)}>Add To Cart</button>
-                                                : <>
+                                    {localStorage.getItem("userToken")?
+                                        <>
+                                            <button
+                                                className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
+                                                onClick={() => addToCart(data._id)}>
+                                                    Add To Cart
+                                            </button>
+                                                {loading? <Loading /> : ''}
+                                         </> 
+                                        : <>
                                         <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link> 
                                                 </>
                                     }
@@ -133,7 +143,7 @@ export default function GetProduct() {
                             </div>
                         </div>
                     </> : <>
-                        <h2>... loding</h2>
+                        <Loading />
                     </>}
 
                 </div>

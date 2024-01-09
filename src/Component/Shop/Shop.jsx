@@ -5,6 +5,7 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import { CartContext } from '../Context/CartContext.Jsx';
 import { Link } from 'react-router-dom';
+import Loading from '../loading/loading';
 
 export default function Shop() {
 
@@ -12,6 +13,7 @@ export default function Shop() {
     const [fromPrice, setFromPrice] = useState(0)
     const [toPrice, setToPrice] = useState(0)
     const [sort, setSort] = useState(0)
+    const [loading,setLoading]=useState(false);
 
     const onSubmit = values => {
         if (values.fromPrice) {
@@ -30,9 +32,6 @@ export default function Shop() {
             fromPrice: '',
             toPrice: '',
             sort : '',
-            // fromLowToHigh: '',
-            // fromHighToLow: '',
-            // byName: ''
         },
         onSubmit,
     })
@@ -42,7 +41,9 @@ export default function Shop() {
     // Change The Api Page =>
     const [page, setPage] = useState(1)
     const pageChange = (e) => {
+        setLoading(true)
         setPage(e.target.value);
+        setLoading(false)
     }
 
     // Get All Products =>
@@ -50,19 +51,23 @@ export default function Shop() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const getProducts = async () => {
         try {
+            setLoading(true)
             const { data } = await axios.get(
                 `${apiUrl}/products?page=${page}&limit=4${fromPrice ? fromPrice : ''}${toPrice ? toPrice : ''}${sort ? sort : ''}`)
-            setData(data);
-        } catch (error) {
-            console.log(error);
+                setData(data);
+            } catch (error) {
+                console.log(error);
+            }finally {
+            setLoading(false)
         }
     }
-
 
     // Add Proudect To Cart = >
     const { addToCartContext } = useContext(CartContext)
     const addToCart = async (productId) => {
+        setLoading(true)
         const res = await addToCartContext(productId)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -74,7 +79,7 @@ export default function Shop() {
             <section>
                 <div className="container-fluid px-0 py-5">
                     <div className="section-titel d-flex w-100 justify-content-center align-items-center mt-4 pb-5">
-                        <h2 className="text-uppercase text-center" id="scrolvispilty">Shop</h2>
+                        <h2 className="text-uppercase text-center" id="scrolvispilty">Shop {loading?<Loading /> : ''} </h2>
                     </div>
                 </div>
                 <div className="container-fluid" id="showNavbar">
@@ -191,12 +196,15 @@ export default function Shop() {
                                                 </> : <>
                                                     <p>{product.price}</p>
                                                 </>}
-                                                {localStorage.getItem("userToken") ? <button
+                                                {localStorage.getItem("userToken") ?
+                                                <>
+                                                <button
                                                     className="btn rounded-pill text-uppercase showPartAtwo addToCartButton"
                                                     onClick={() => addToCart(product._id)}>Add To Cart</button>
-                                                    : <>
-                                                        <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link>
-                                                    </>
+                                                    {loading?<Loading /> : ''}
+                                                </> : <>
+                                                    <Link to="/register" className='btn rounded-pill text-uppercase showPartAtwo addToCartButton'>Add To Cart</Link>
+                                                </>
                                                 }
                                             </div>
                                         </div>
