@@ -79,7 +79,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                 </div>
                             </li>
                             <li className="nav-link">
-                                <div className="collapse navbar-collapse bg-transparent" id>
+                                <div className="collapse navbar-collapse bg-transparent" >
                                     <form className="d-flex " role="search">
                                         <input className="form-control me-2 bg-transparent border border-0 search-custom" type="search" placeholder="Search" aria-label="Search" />
                                     </form>

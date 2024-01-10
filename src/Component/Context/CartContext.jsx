@@ -12,7 +12,6 @@ export function CartContextProvider({ children }) {
     const addToCartContext = async (productId) => {
         try {
             const token = localStorage.getItem("userToken");
-
             const { data } = await axios.post(`${apiUrl}/cart`,
                 { productId },
                 {
