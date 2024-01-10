@@ -27,13 +27,13 @@ export default function ProfileNavbar() {
                                     <img src={data.user.image.secure_url} alt="Logo" width={50} height={50} className="d-inline-block align-text-top me-3 rounded-circle" />
                                     {data.user.userName}
                                 </>
-                                : console.log("erre")
+                                : <></>
                         }
                     </div>
                 </ul>
                 <ul className="navbar-nav h-75 w-100 align-items-center text-center">
                     <li className="nav-item py-2 w-100">
-                        <Link className="nav-link nav-text" aria-current="page" to="/Profile/">profil eDetails</Link>
+                        <Link className="nav-link nav-text" aria-current="page" to="/Profile/">profile Details</Link>
                     </li>
                     <li className="nav-item py-2 w-100">
                         <Link className="nav-link nav-text " to="/Profile/Contact">

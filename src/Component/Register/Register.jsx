@@ -6,7 +6,7 @@ import LogInSection from './LogInSection'
 export default function Register({getCurentUser}) {
     return (
         <>
-            <PageNavLink />
+            <PageNavLink pageName={"My Account"}/>
             <section className="main-section">
                 <div className="container-fluid">
                     <div className="row  m-1 m-lg-5">

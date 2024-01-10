@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import { CartContext } from '../Context/CartContext.Jsx';
 import { Link } from 'react-router-dom';
 import Loading from '../loading/loading';
+import PageNavLink from '../PageNavLink/PageNavLink';
 
 export default function Shop() {
 
@@ -76,6 +77,7 @@ export default function Shop() {
 
     return (
         <>
+            <PageNavLink pageName="Shop"/>
             <section>
                 <div className="container-fluid px-0 py-5">
                     <div className="section-titel d-flex w-100 justify-content-center align-items-center mt-4 pb-5">
@@ -144,7 +146,7 @@ export default function Shop() {
                                         onChange={formik.handleChange}
                                         name="sort"
                                     >
-                                        <option selected>Open this select menu</option>
+                                        <option selected>Default</option>
                                         <option value='price'>from High To Low Price</option>
                                         <option value='-price'>from Low To High Price</option>
                                         <option value='name'>name</option>

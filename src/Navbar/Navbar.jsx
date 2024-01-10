@@ -35,14 +35,31 @@ export default function Navbar({ userToken, setUserToken }) {
         setDataProfile(res)
     }
 
-        useEffect(() => {
-            if (localStorage.getItem("userToken")) {
-                GetProfile()
-            }
-        }, [Logout]);
-        let { quantity } = useContext(CartContext)
-
+    
     // Cart Quantity =>
+    let { GetCartContext} = useContext(CartContext);
+    const [qunData, setQunData] = useState(null);
+    const [ Quantity , setQuantity] = useState(0)
+    const GetCart = async () => {
+        const res = await GetCartContext()
+        setQunData(res);
+    }
+    const QuantityFunction = ()=>{
+        let count = 0;
+        qunData?.products ? qunData.products.map((qun)=>{
+            count = count + qun.quantity;
+        }):'';
+        setQuantity(count);
+    }
+    useEffect(() => {
+        if (localStorage.getItem("userToken")) {
+            GetProfile()
+            GetCart();
+        }
+        QuantityFunction()
+    }, []);
+
+
     return (
         <>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
@@ -139,8 +156,8 @@ export default function Navbar({ userToken, setUserToken }) {
                                         <div className="dropdown" >
                                             <Link className="text-black nav-text px-2 position-relative text-decoration-none custom-icon-hover" to="/Cart">
                                                 Cart
-                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                    {quantity}
+                                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {Quantity}
                                                 </span>
                                             </Link>
                                         </div>

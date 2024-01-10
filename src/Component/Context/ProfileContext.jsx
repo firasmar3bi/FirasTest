@@ -7,7 +7,7 @@ export const ProfileContext = createContext(null)
 export function ProfileContextProvider({children}){
     
     const apiUrl = import.meta.env.VITE_API_URL;
-
+    // Get Detiles Customer Context =>
     const GetProfileContext = async ()=>{
         try{
             const token = localStorage.getItem("userToken");
@@ -21,7 +21,6 @@ export function ProfileContextProvider({children}){
             console.log(error);
         }
     }
-
 
     return <ProfileContext.Provider value={ {GetProfileContext} }> {children} </ProfileContext.Provider>
 }

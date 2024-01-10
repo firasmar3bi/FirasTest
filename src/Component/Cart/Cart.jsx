@@ -3,16 +3,16 @@ import { CartContext } from '../Context/CartContext.Jsx'
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import Loading from '../loading/loading';
+import Loading from '../loading/Loading';
 
 export default function Cart() {
-
-    let { GetCartContext, quantity, setQuantity } = useContext(CartContext);
+    // define variable =>
+    let { GetCartContext , increaseQunntityCotext , decreaseQunntityCotext} = useContext(CartContext);
     const [data, setData] = useState(null);
     const [loading,setLoading]=useState(false);
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    // Get Cart Proudect =>
+    // Get Cart Proudect =>className
     const GetCart = async () => {
         const res = await GetCartContext()
         setData(res);
@@ -30,8 +30,6 @@ export default function Cart() {
                 }
             )
             if (data.message == 'success') {
-                setQuantity(quantity = 0)
-                localStorage.removeItem("quantity")
                 toast.success('Clear Cart success', {
                     position: "top-right",
                     autoClose: 5000,
@@ -47,6 +45,7 @@ export default function Cart() {
         } catch (error) {
             console.log(error);
         } finally {
+            GetCart()
             setLoading(false);
         }
     }
@@ -63,8 +62,6 @@ export default function Cart() {
                 }
             )
             if (data.message == 'success') {
-                setQuantity(quantity - 1);
-                localStorage.setItem("quantity",quantity)
                 toast.success('Clear Cart success', {
                     position: "top-right",
                     autoClose: 3000,
@@ -88,26 +85,29 @@ export default function Cart() {
     const removeItem = (productId) => {
         setLoading(true)
         removeItemFunction(productId)
+        GetCart()
         setLoading(false)
     }
 
-    let plusQuantity = () => {
+    // increase and decrease quantity =>
+    const increaseQunntity = async (productId) => {
         setLoading(true)
-        setQuantity(quantity + 1);
-        localStorage.setItem("quantity",quantity)
+        const res = await increaseQunntityCotext(productId)
+        GetCart()
         setLoading(false)
     }
-    let minusQuantity = () => {
+    const decreaseQunntity = async (productId) => {
         setLoading(true)
-        setQuantity(quantity - 1);
-        localStorage.setItem("quantity",quantity)
+        const res = await decreaseQunntityCotext(productId)
+        GetCart()
         setLoading(false)
     }
 
-
+    // Get All Cart Porduct Use Effect = >
     useEffect(() => {
         GetCart()
-    }, [clerCart]);
+    }, []);
+
     return (
         <>
             <section className="main-section" id="showNavbar">
@@ -116,7 +116,6 @@ export default function Cart() {
                         <div className='col-8'>
                             <h1 className="py-5 mt-5 ps-3 d-inline-block">My Cart</h1>
                             <button className='btn btn-danger text-capitalize nav-custom-font mx-5 d-inline' onClick={() => clerCart()}>Clear Cart</button>
-                                 {loading ? <Loading/> : ''}
                             <div className="row d-none d-md-flex">
                                 <div className="col-2 d-flex justify-content-center align-items-center">
                                     <p className="wishTitel p-0 m-0 border-0">Product Img</p>
@@ -135,8 +134,8 @@ export default function Cart() {
                                 </div>
                             </div>
                             {
-                                data?.products ? data.products.map((product, index) => <>
-                                    <div className="row py-4 position-relative" id="closeRow-1" key={index}>
+                                data?.products ? data.products.map((product) => <>
+                                    <div className="row py-4 position-relative" id="closeRow-1" key={product._id}>
                                         <div className="col-12 col-md-3">
                                             <div className="w-100">
                                                 <img src={product.details.mainImage.secure_url} alt={product.details.name} className="w-50" />
@@ -153,19 +152,18 @@ export default function Cart() {
                                             </> : <>
                                                 <p className=" price-2">{product.details.finalPrice}</p>
                                             </>}
-
                                         </div>
                                         <div className="col-12 col-md-3 d-flex justify-content-center align-items-center">
-                                            <button className='btn me-2 btn-light' onClick={() => minusQuantity()} > - </button>
-                                            <p className="m-0">{quantity} {loading ? <Loading/> : ''} </p>
-                                            <button className='btn ms-2 btn-light' onClick={() => plusQuantity()} > + </button>
+                                            <button className='btn me-2 btn-light' onClick={() => decreaseQunntity(product.productId)}> - </button>
+                                            <p className="m-0">{product.quantity} {loading ? <Loading/> : ''} </p>
+                                            <button className='btn ms-2 btn-light' onClick={() => increaseQunntity(product.productId)} > + </button>
                                         </div>
                                         <div className="col-12 col-md-1 d-flex justify-content-center align-items-center ">
                                             {loading ? <Loading/> : ''}
                                             <button type="button" className="btn-close closeCustom" onClick={() => removeItem(product.productId)} />
                                         </div>
                                     </div>
-                                </>) : <><Loading /></>
+                                </>) : <><Loading /> </>
                             }
                         </div>
                         <div className='col-4 py-5 mt-5'>
@@ -180,23 +178,25 @@ export default function Cart() {
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center mb-4 border border-1 border-black rounded-2 px-2 py-3'>
                                             <div className='d-flex justify-content-center align-items-center w-50'>
-                                                <input type="radio" className='w-25 me-3'/> <label className='w-75'>Express shipping</label>
+                                                <input type="radio" className='w-25 me-3' disabled/> <label className='w-75'>Express shipping</label>
                                             </div>
                                             <span>+$15.00</span>
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center mb-4 border border-1 border-black rounded-2 px-2 py-3'>
                                             <div className='d-flex justify-content-center align-items-center w-50'>
-                                                <input type="radio" className='w-25 me-3'/> <label className='w-75'>Pick Up</label>
+                                                <input type="radio" className='w-25 me-3' disabled/> <label className='w-75'>Pick Up</label>
                                             </div>
                                             <span>%21.00</span>
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center mb-4 border border-1 border-black rounded-2 px-2 py-3'>
                                             <label className='ms-4'>Subtotal</label>
-                                            <span>$1234.00</span>
+                                            <span>
+                                                
+                                            </span>
                                         </div>
                                         <div  className='d-flex justify-content-between align-items-center mb-4 border border-1 border-success rounded-3 px-2 py-3'>
                                             <label className='ms-4'>Total</label>
-                                            <span className='price-2'>$1345.00</span>
+                                            <span className='price-2'>$435.00</span>
                                         </div>
                                         <div>
                                             <Link to="/Checkout" className='btn btn-success'>Chekout</Link>

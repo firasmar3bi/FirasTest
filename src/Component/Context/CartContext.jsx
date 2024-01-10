@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 export const CartContext = createContext(null)
 
 export function CartContextProvider({ children }) {
-
+    
     const apiUrl = import.meta.env.VITE_API_URL;
-    let [quantity, setQuantity] = useState(0);
 
+    // Add to Cart Context =>
     const addToCartContext = async (productId) => {
         try {
             const token = localStorage.getItem("userToken");
@@ -19,8 +19,6 @@ export function CartContextProvider({ children }) {
                 }
             )
             if (data.message == 'success') {
-                setQuantity(quantity + 1)
-                localStorage.setItem("quantity", quantity)
                 toast.success('Product Add success', {
                     position: "top-right",
                     autoClose: 5000,
@@ -38,7 +36,31 @@ export function CartContextProvider({ children }) {
             console.log(error);
         }
     }
-
+    // Increase Quantity Context =>
+    const increaseQunntityCotext = async (productId) =>{
+        try {
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.patch(`${apiUrl}/cart/incraseQuantity`,
+            { productId },
+            {headers: { Authorization: `Tariq__${token}` }})
+            return data
+        }catch(error){
+            console.log(error);
+        }
+    }
+    //  Decreas Quantity Context =>
+    const decreaseQunntityCotext = async (productId) =>{
+        try {
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.patch(`${apiUrl}/cart/decraseQuantity`,
+            { productId },
+            {headers: { Authorization: `Tariq__${token}` }})
+            return data
+        }catch(error){
+            console.log(error);
+        }
+    }
+    //  Get Cart Product Context =>
     const GetCartContext = async () => {
         try {
             const token = localStorage.getItem("userToken");
@@ -53,5 +75,5 @@ export function CartContextProvider({ children }) {
         }
     }
 
-    return <CartContext.Provider value={{ addToCartContext, GetCartContext, quantity, setQuantity }}> {children} </CartContext.Provider>
+    return <CartContext.Provider value={{ addToCartContext, GetCartContext , increaseQunntityCotext , decreaseQunntityCotext }}> {children} </CartContext.Provider>
 }

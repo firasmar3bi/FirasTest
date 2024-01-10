@@ -5,8 +5,7 @@ import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
 import { LogInSchema } from '../validation/validation'
 import { Link, useNavigate } from 'react-router-dom'
-import ForgetPassword from './ForgetPassword';
-import Loading from '../loading/loading';
+
 
 export default function LogInSection({ getCurentUser }) {
 

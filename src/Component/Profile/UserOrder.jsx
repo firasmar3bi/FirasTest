@@ -32,15 +32,15 @@ export default function UserOrder() {
                 <tbody>
         {
           data?.orders ? data.orders.map((order, index) =>
-            <>
-                  <tr>
+           
+                  <tr key={index}>
                     <th>{index + 1}</th>
                     <td className='w-25'>{order.createdAt}</td>
                     <td >{order.products[0].productId.name}</td>
                     <td>{order.status}</td>
                     <td>{order.address}</td>
                   </tr>
-            </>
+            
           )
           : <></>
         }

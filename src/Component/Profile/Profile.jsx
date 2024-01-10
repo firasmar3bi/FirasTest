@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ProfileContext } from '../Context/ProfileContext';
+import Loading from '../loading/Loading';
 
 export default function Profile() {
 
     const {GetProfileContext} = useContext(ProfileContext)
     const [data,setData] = useState(null);
+    // Get Profile Detiles =>
     const GetProfile = async ()=>{
         const data = await GetProfileContext()
         setData(data)
@@ -43,7 +45,7 @@ export default function Profile() {
                                     </div>
                                 </div>
                             </>
-                            : <></>
+                        : <> <Loading /> </>
                     }
                 </div>
             </div>
