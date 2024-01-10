@@ -12,35 +12,28 @@ export function CartContextProvider({ children }) {
     const addToCartContext = async (productId) => {
         try {
             const token = localStorage.getItem("userToken");
-            if (token) {
-                const { data } = await axios.post(`${apiUrl}/cart`,
-                    { productId },
-                    {
-                        headers: { Authorization: `Tariq__${token}` }
-                    }
-                )
-                if (data.message == 'success') {
-                    setQuantity(quantity + 1)
-                    localStorage.setItem("quantity", quantity)
-                    toast.success('Product Add success', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: 1,
-                        theme: "colored",
-                    });
+
+            const { data } = await axios.post(`${apiUrl}/cart`,
+                { productId },
+                {
+                    headers: { Authorization: `Tariq__${token}` }
                 }
-                return (data);
-            } else {
-                <>
-                    {/* <div class="alert alert-danger" role="alert">
-                        A simple danger alert—check it out!
-                    </div> */}
-                </>
+            )
+            if (data.message == 'success') {
+                setQuantity(quantity + 1)
+                localStorage.setItem("quantity", quantity)
+                toast.success('Product Add success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: 1,
+                    theme: "colored",
+                });
             }
+            return (data);
 
         } catch (error) {
             console.log(error);
