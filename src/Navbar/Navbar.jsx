@@ -47,9 +47,9 @@ export default function Navbar({ userToken, setUserToken }) {
         <>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
                 <div className="container-fluid justify-content-lg-around justify-content-between align-items-center mt-4">
-                    <a className="navbar-brand" href="index.html">
+                    <Link className="navbar-brand" to='/'>
                         <img src={Logo} alt="druco logo" className="w-100" />
-                    </a>
+                    </Link>
                     <button className="navbar-toggler  " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="showButtonScroll">
                         <span className="navbar-toggler-icon" />
                     </button>
@@ -150,7 +150,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                     <div className="d-none nav-custom-mobile">
                                         <div className="d-flex  flex-column w-100">
                                             <div className="d-flex me-5 justify-content-between align-items-center bg-white w-100 border-1 border-dark">
-                                                <a href="login.html" className="d-inline-block text-dark text-decoration-none nav-link"> <i className="fa-regular fa-user" />Login/Register</a>
+                                                <Link to='/register' className="d-inline-block text-dark text-decoration-none nav-link"> <i className="fa-regular fa-user" />Login/Register</Link>
                                                 <div className="d-flex">
                                                     <ul className="navbar-nav">
                                                         <li className="nav-item dropdown mob-li">

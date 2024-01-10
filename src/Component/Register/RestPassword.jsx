@@ -68,9 +68,9 @@ export default function RestPassword() {
         <>
             <div className='container'>
                 <div className='row'>
-                    <div className='col-7'>
+                    <div className='col-7 d-sm-none'>
                     </div>
-                    <div className='col-5'>
+                    <div className='col-12 col-lg-5'>
                         <div className='card'>
                             <div className='p-3'>
                                 <h2 className='mb-5 fw-bolder'>Enter New Password </h2>
