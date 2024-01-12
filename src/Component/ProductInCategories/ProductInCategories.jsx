@@ -24,7 +24,7 @@ export default function ProductInCategories() {
         }
     }
     // Set Product In Cash Browser =>
-    const { data, isLoading } = useQuery("api_ProdectFromCategories", getProductFromCatgories)
+    const { data, isLoading } = useQuery(["api_ProdectFromCategories" , id], getProductFromCatgories )
     if (isLoading) {
         <h2>... Loding</h2>
     }
@@ -34,7 +34,7 @@ export default function ProductInCategories() {
         const res = await addToCartContext(productId)
         setLoading(true)
     }
-
+    
     return (
         <>
             <PageNavLink pageName='Product' subPage="Catgories" />

@@ -36,6 +36,20 @@ export function CartContextProvider({ children }) {
             console.log(error);
         }
     }
+        //  Get Cart Product Context =>
+        const GetCartContext = async () => {
+            try {
+                const token = localStorage.getItem("userToken");
+                const { data } = await axios.get(`${apiUrl}/cart`,
+                    {
+                        headers: { Authorization: `Tariq__${token}` }
+                    }
+                )
+                return (data);
+            } catch (error) {
+                return <><p className="bg-danger">Ther no data in Cart </p></>;
+            }
+        }
     // Increase Quantity Context =>
     const increaseQunntityCotext = async (productId) =>{
         try {
@@ -43,6 +57,7 @@ export function CartContextProvider({ children }) {
             const {data} = await axios.patch(`${apiUrl}/cart/incraseQuantity`,
             { productId },
             {headers: { Authorization: `Tariq__${token}` }})
+            GetCartContext()
             return data
         }catch(error){
             console.log(error);
@@ -55,25 +70,13 @@ export function CartContextProvider({ children }) {
             const {data} = await axios.patch(`${apiUrl}/cart/decraseQuantity`,
             { productId },
             {headers: { Authorization: `Tariq__${token}` }})
+            GetCartContext()
             return data
         }catch(error){
             console.log(error);
         }
     }
-    //  Get Cart Product Context =>
-    const GetCartContext = async () => {
-        try {
-            const token = localStorage.getItem("userToken");
-            const { data } = await axios.get(`${apiUrl}/cart`,
-                {
-                    headers: { Authorization: `Tariq__${token}` }
-                }
-            )
-            return (data);
-        } catch (error) {
-            return <><p className="bg-danger">Ther no data in Cart </p></>;
-        }
-    }
+
 
     return <CartContext.Provider value={{ addToCartContext, GetCartContext , increaseQunntityCotext , decreaseQunntityCotext }}> {children} </CartContext.Provider>
 }

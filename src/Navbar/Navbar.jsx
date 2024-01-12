@@ -35,10 +35,9 @@ export default function Navbar({ userToken, setUserToken }) {
         setDataProfile(res)
     }
 
-    
     // Cart Quantity =>
     let { GetCartContext} = useContext(CartContext);
-    const [qunData, setQunData] = useState(null);
+    const [qunData, setQunData] = useState([]);
     const [ Quantity , setQuantity] = useState(0)
     const GetCart = async () => {
         const res = await GetCartContext()
@@ -46,9 +45,13 @@ export default function Navbar({ userToken, setUserToken }) {
     }
     const QuantityFunction = ()=>{
         let count = 0;
-        qunData?.products ? qunData.products.map((qun)=>{
-            count = count + qun.quantity;
-        }):'';
+        if (qunData && qunData.products) {
+            qunData.products.map((qun)=>{
+                count = count + qun.quantity;
+            });
+        }else{
+            count = 0;
+        }
         setQuantity(count);
     }
     useEffect(() => {
@@ -56,10 +59,14 @@ export default function Navbar({ userToken, setUserToken }) {
             GetProfile()
             GetCart();
         }
-        QuantityFunction()
     }, []);
 
-
+    useEffect(() => {
+        if (qunData && qunData.products){
+            QuantityFunction()
+        }
+    }, [qunData]);
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg p-0 bg-white flex-column" id="navBarTwo">
@@ -156,7 +163,7 @@ export default function Navbar({ userToken, setUserToken }) {
                                         <div className="dropdown" >
                                             <Link className="text-black nav-text px-2 position-relative text-decoration-none custom-icon-hover" to="/Cart">
                                                 Cart
-                                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id='CartQuntity'>
                                                     {Quantity}
                                                 </span>
                                             </Link>
