@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import axios from "axios";
-import Input from './Input'
+import Input from './Input.jsx'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
-import { SingInSchema } from '../validation/validation'
+import { SingInSchema } from '../validation/validation.jsx'
 
 export default function SignUp() {
     

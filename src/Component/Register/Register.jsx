@@ -1,7 +1,7 @@
 import React from 'react'
-import PageNavLink from '../PageNavLink/PageNavLink'
-import SignUp from './SignUp'
-import LogInSection from './LogInSection'
+import PageNavLink from '../PageNavLink/PageNavLink.jsx'
+import SignUp from './SignUp.jsx'
+import LogInSection from './LogInSection.jsx'
 
 export default function Register({getCurentUser}) {
     return (

@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from 'react'
-import { ProfileContext } from '../Context/ProfileContext';
+import { ProfileContext } from '../Context/ProfileContext.jsx';
 
 export default function Contact() {
     const { GetProfileContext } = useContext(ProfileContext)

@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from './Layout/Layout'
-import Home from './Component/Home/Home'
-import Register from './Component/Register/Register'
+import Layout from './Layout/Layout.jsx'
+import Home from './Component/Home/Home.jsx'
+import Register from './Component/Register/Register.jsx'
 import { jwtDecode } from "jwt-decode";
-import Catrgories from './Component/Categories/Catrgories';
-import ProductInCategories from './Component/ProductInCategories/ProductInCategories';
-import GetProduct from './Component/GetProduct/GetProduct';
-import Shop from './Component/Shop/Shop';
-import Cart from './Component/Cart/Cart';
-import Profile from './Component/Profile/Profile';
-import ProfileLayout from './Layout/ProfileLayout';
-import UserOrder from './Component/Profile/UserOrder';
-import Contact from './Component/Profile/Contact';
-import Checkout from './Component/Checkout/Checkout';
-import ProtectRouting from './Component/ProtectRouting/ProtectRouting';
-import PageNotFound from './Component/PageNotFound/PageNotFound';
-import ForgetPassword from './Component/Register/ForgetPassword';
-import RestPassword from './Component/Register/restPassword';
+import Catrgories from './Component/Categories/Catrgories.jsx';
+import ProductInCategories from './Component/ProductInCategories/ProductInCategories.jsx';
+import GetProduct from './Component/GetProduct/GetProduct.jsx';
+import Shop from './Component/Shop/Shop.jsx';
+import Cart from './Component/Cart/Cart.jsx';
+import Profile from './Component/Profile/Profile.jsx';
+import ProfileLayout from './Layout/ProfileLayout.jsx';
+import UserOrder from './Component/Profile/UserOrder.jsx';
+import Contact from './Component/Profile/Contact.jsx';
+import Checkout from './Component/Checkout/Checkout.jsx';
+import ProtectRouting from './Component/ProtectRouting/ProtectRouting.jsx';
+import PageNotFound from './Component/PageNotFound/PageNotFound.jsx';
+import ForgetPassword from './Component/Register/ForgetPassword.jsx';
+import RestPassword from './Component/Register/restPassword.jsx';
 
 
 export default function App() {

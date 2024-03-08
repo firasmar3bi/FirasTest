@@ -1,8 +1,8 @@
 import React from 'react'
-import ProfileNavbar from '../Component/Profile/ProfileNavbar'
+import ProfileNavbar from '../Component/Profile/ProfileNavbar.jsx'
 import { Outlet } from 'react-router-dom'
-import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer'
+import Navbar from '../Navbar/Navbar.jsx'
+import Footer from '../Footer/Footer.jsx'
 
 export default function ProfileLayout({userToken , setUserToken}) {
   return (

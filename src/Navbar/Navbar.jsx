@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Logo from '../assets/img/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { CatgoriesContext } from '../Component/Context/CatgoriesContext'
-import { CartContext } from '../Component/Context/CartContext'
-import { ProfileContext } from '../Component/Context/ProfileContext'
+import { CatgoriesContext } from '../Component/Context/CatgoriesContext.jsx'
+import { CartContext } from '../Component/Context/CartContext.jsx'
+import { ProfileContext } from '../Component/Context/ProfileContext.jsx'
 import { toast } from 'react-toastify';
 
 export default function Navbar({ userToken, setUserToken }) {

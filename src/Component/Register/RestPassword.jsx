@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react'
-import Input from './Input';
+import Input from './Input.jsx';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 export default function RestPassword() {

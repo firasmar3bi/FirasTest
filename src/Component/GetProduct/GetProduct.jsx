@@ -6,7 +6,7 @@ import "./GetProduct.css"
 import Loading from '../loading/loading';
 import { CartContext } from '../Context/CartContext.Jsx';
 import GetReviews from './GetReviews';
-import PageNavLink from '../PageNavLink/PageNavLink';
+import PageNavLink from '../PageNavLink/PageNavLink.jsx';
 
 export default function GetProduct() {
 

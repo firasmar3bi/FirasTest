@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Input from './Input'
+import Input from './Input.jsx'
 import axios from "axios";
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
-import { LogInSchema } from '../validation/validation'
+import { LogInSchema } from '../validation/validation.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 
 

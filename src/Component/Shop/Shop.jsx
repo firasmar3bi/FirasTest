@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import { CatgoriesContext } from '../Context/CatgoriesContext'
+import { CatgoriesContext } from '../Context/CatgoriesContext.jsx'
 import axios from "axios";
 import { useFormik } from 'formik'
 import { CartContext } from '../Context/CartContext.Jsx';
 import { Link } from 'react-router-dom';
-import Loading from '../loading/loading';
-import PageNavLink from '../PageNavLink/PageNavLink';
+import Loading from '../loading/Loading.jsx';
+import PageNavLink from '../PageNavLink/PageNavLink.jsx';
 
 export default function Shop() {
 
